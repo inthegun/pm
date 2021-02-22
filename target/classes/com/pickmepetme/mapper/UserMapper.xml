@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="com.pickmepetme.mapper.UserMapper">
+	
+<!-- UserMapper sql문 작성하는 곳입니다. -->
+<!-- 만약 select문을 사용하여 DTO값이 필요하면 아래와 같이 resultType을 사용하면 된다. -->
+<!-- 
+ex)  
+<		<select id = "getList" resultType ="org.zerock.domain.BoardVO">
+			<![CDATA[
+			select * from tbl_board where bno > 0
+			]]>
+		</select>
+-->
+
+<!-- user테이블에서 user_name이 name인 유저정보   -->
+<insert id = "register_user">
+insert into user(user_id, user_passwd, user_name, user_birth, user_addr, user_phone, user_sex, user_email, user_date)
+values(#{user_id}, #{user_passwd}, #{user_name}, #{user_birth}, #{user_addr}, #{user_phone}, #{user_sex}, #{user_email}, NOW())
+</insert>
+
+<select id="login" resultType="com.pickmepetme.domain.UserVO">
+	select user_id , user_passwd from user where user_id = #{user_id} and user_passwd = #{user_passwd}
+</select>
+
+
+</mapper>
+
