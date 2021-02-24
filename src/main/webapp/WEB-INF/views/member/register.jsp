@@ -9,7 +9,7 @@
 <body>
 <h1>register Page</h1>
 
-<form role = "registerForm" action="/board/register" method = "post">
+<form role = "registerForm" action="/member/register" method = "post">
 id
 <input type="text" id="user_id" name="user_id"> <br>
 passwd

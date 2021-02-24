@@ -60,3 +60,6 @@ drop table enquiry
 
 select user_id, user_passwd from user where user_id = 1 and user_passwd = 1;
 select user_id , user_passwd from user where user_id = #{username} and user_passwd = #{password}
+
+select * from user where user_id=1;
+select * from user where user_id=#{user_id}

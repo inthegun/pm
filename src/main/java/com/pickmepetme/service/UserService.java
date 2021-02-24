@@ -8,4 +8,7 @@ public interface UserService  {
 
 	// 로그인
 	public UserVO login(UserVO uservo);
+	
+	// 회원 정보 조회
+	public UserVO readMember(String id);
 }

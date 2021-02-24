@@ -1,6 +1,7 @@
 package com.pickmepetme.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -17,6 +18,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.pickmepetme.domain.UserVO;
 import com.pickmepetme.service.UserService;
 
+
+// 회원 컨트롤러 
 @Controller
 @RequestMapping("/member")
 public class UserController {
@@ -55,20 +58,24 @@ public class UserController {
 		
 		// 로그인 처리
 		@RequestMapping(value="/login_ok",method=RequestMethod.POST)
-		public String postLogin(HttpSession session,HttpServletRequest req,
+		public String postLogin(HttpServletRequest req, HttpServletResponse response,
 				RedirectAttributes rttr,UserVO userVO , Model model) throws Exception {
 			logger.info("로그인 처리 호출");
 			
-			session = req.getSession();
-			UserVO login = userService.login(userVO);
+			HttpSession session = req.getSession();
+			UserVO user = userService.login(userVO);
 			
-			if(login == null) {
+			if(user == null) {
+				logger.info("로그인 처리안됨");
 				session.setAttribute("member", null);
 				rttr.addFlashAttribute("msg",false);
-				return "redirect:/login";
+				return "redirect:/member/login";
 			}else {
-				session.setAttribute("member", login);
-				model.addAttribute("login", login);
+				logger.info("로그인 처리됨");
+				session.setAttribute("member", user); 
+				session.setAttribute("userId", user.getUser_id()); // id 
+				session.setAttribute("userName", user.getUser_name()); // name 
+				model.addAttribute("login", user);
 				return "home";
 			}
 		
@@ -79,6 +86,30 @@ public class UserController {
 			session.invalidate();
 			return "redirect:/";
 		}
+		
+		// 회원 정보 조회
+		@RequestMapping(value="/info",method=RequestMethod.GET)
+		public String member_info(HttpServletRequest req, HttpSession session, Model model) throws Exception{
+			
+			logger.info("회원 정보 조회 호출");
+			// 세션 객체의 ID 정보를 가져옴 
+			session = req.getSession();
+			String id = (String) session.getAttribute("userId");
+			logger.info("세션 아이디 :"+ id);
+			
+			// 회원정보 보기 메서드 호출
+			UserVO userVO = userService.readMember(id);
+			
+			// 정보를 model에 저장후 페이지 이동
+			model.addAttribute("UserInfo", userVO);
+			return "member/info";
+		}
+		
+		// 회원 정보 수정
+		
+		
+		// 회원 정보 삭제(탈퇴)
+		
 	
 	
 	

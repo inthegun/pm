@@ -12,9 +12,11 @@ import com.pickmepetme.mapper.UserMapper;
 public class UserServiceImpl implements UserService {
 	
 	private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+	
 	@Autowired
 	private UserMapper userMapper;
 	
+	// 회원가입
 	@Override
 	public void register(UserVO uservo) {
 		logger.info("UserServiceImpl register를 실행합니다.");
@@ -24,11 +26,30 @@ public class UserServiceImpl implements UserService {
 		
 	}
 
+	// 로그인
 	@Override
 	public UserVO login(UserVO uservo) {
 		logger.info("UserServiceImpl login을 실행합니다");
 		
 		return userMapper.login(uservo);
 	}
+
+	// 회원 정보 조회 
+	@Override
+	public UserVO readMember(String id) {
+		logger.info("UserServiceImpl readMember");
+		UserVO userVO = null;
+		
+		try {
+			userVO= userMapper.readMember(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return userVO;
+	}
+	
+	
+	
 
 }
