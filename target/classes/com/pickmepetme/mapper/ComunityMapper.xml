@@ -7,4 +7,9 @@
 	
 <!-- ComunityMapper sql문 작성하는 곳입니다. -->
 
+<!-- list 목록 -->
+<select id="getList" resultType="com.pickmepetme.domain.ComunityVO">
+	select * from comunity where post_no > 0
+</select>
+
 </mapper>

@@ -3,9 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-
-
-<%@include file="../includes/header.jsp" %>
+<%@include file="../../includes/header.jsp" %>
 	
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -17,25 +15,27 @@
                             <div class="table-responsive">
                                 <table class="table table-striped table-bordered table-hover" width="100%" cellspacing="0">
 
+
+<%-- <c:out value = "${free_list.post_no }" /> --%>
                                     <thead>
                                     <!-- 1.목록이름 -->
                                     <tr>
                                     	<th>#번호</th>
                                     	<th>제목</th>
+                                    	<th>내용</th>
                                     	<th>작성자</th>
                                     	<th>작성일</th>
-                                    	<th>수정일</th>
                                     </tr>
                                     </thead>
                                     
                                     <!-- 테이블내용 -->
-                                    <c:forEach items="${list }" var = "board">
+                                    <c:forEach items="${free_list }" var = "list">
                                     	<tr>
-                                    		<td></td>
-                                    		<td></td>
-                                    		<td></td>
-                                    		<td></td>
-                                    		<td></td>
+                                    		<td><c:out value = "${list.post_no }" /></td>
+                                    		<td><c:out value = "${list.post_title }" /></td>
+                                    		<td><c:out value = "${list.post_contact }" /></td>
+                                    		<td><c:out value = "${list.user_id }" /></td>
+                                    		<td><fmt:formatDate pattern = "yyyy-MM-dd HH:mm" value = "${list.post_date }" /></td>
                                     	</tr>
                                     </c:forEach>
                                   </table>
@@ -86,4 +86,4 @@
 
            
 
-<%@include file="../includes/footer.jsp"%>
+<%@include file="../../includes/footer.jsp"%>
