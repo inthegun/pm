@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.pickmepetme.domain.ComunityVO;
 import com.pickmepetme.domain.Criteria;
@@ -25,13 +26,46 @@ public class ComunityController {
 	ComunityService comunityService;
 	ComunityVO comunityVO;
 	
+	// 게시글 리스트
 	@RequestMapping(value="/free_community/list",method=RequestMethod.GET)
-	
 	public void free_list(Criteria cri, Model model) {
-		logger.info("ComunityController free_list...");
-		model.addAttribute("free_list", comunityService.getList());
-		model.addAttribute("pagemaker", new PageVO(cri,123));
+		logger.info("ComunityController free_list... : " + cri);
+		model.addAttribute("free_list", comunityService.getList(cri));
+		
+		int total = comunityService.getTotal(cri);
+		
+		model.addAttribute("pageMaker", new PageVO(cri,total));
+		
 		
 	}
+	
+	//게시글 상세보기
+		@RequestMapping(value = "/free_community/view", method = RequestMethod.GET)
+		public String getPageview(@RequestParam("post_no") int post_no, Model model) throws Exception {
+			ComunityVO view = null;
+			view =  comunityService.pageview(post_no);
+			
+			model.addAttribute("view", view);
+			
+			logger.info("형왔다"+view);
+			return "community/free_community/view";
+		}
+		
+		
+		
+		
+		
+		// 게시물 수정
+			@RequestMapping(value = "/free_community/update", method = RequestMethod.GET)
+			public String getUpdate(@RequestParam("post_no") int post_no, Model model) throws Exception {
+				ComunityVO view = null;
+				view =  comunityService.pageview(post_no);
+				
+				model.addAttribute("view", view);
+				return "community/free_community/update";
+			}
+	
+	
 
 }
+

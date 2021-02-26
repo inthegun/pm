@@ -3,15 +3,17 @@ package com.pickmepetme.domain;
 import java.util.Date;
 
 public class UserVO {
-	private String user_id; // 아이디
-	private String user_passwd; // 패스워드
-	private String user_name; // 이름
-	private Date user_birth; // 생년월일
-	private String user_addr; // 주소 
-	private String user_phone; // 전화
-	private String user_sex; // 성별
-	private String user_email; // 이메일
-	private Date user_date; // 가입날짜
+	private String user_id;
+	private String user_passwd;
+	private String user_name;
+	private Date user_birth;
+	private String user_addr;
+	private String user_phone;
+	private String user_sex;
+	private String user_email;
+	private Date user_date;
+	
+	
 	public String getUser_id() {
 		return user_id;
 	}
@@ -65,9 +67,7 @@ public class UserVO {
 	}
 	public void setUser_date(Date user_date) {
 		this.user_date = user_date;
-	}
-	
-	
+	}  
 	
 	
 }

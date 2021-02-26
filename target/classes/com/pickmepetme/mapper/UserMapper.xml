@@ -22,6 +22,7 @@ insert into user(user_id, user_passwd, user_name, user_birth, user_addr, user_ph
 values(#{user_id}, #{user_passwd}, #{user_name}, #{user_birth}, #{user_addr}, #{user_phone}, #{user_sex}, #{user_email}, NOW())
 </insert>
 
+<!-- 로그인  -->
 <select id="login" resultType="com.pickmepetme.domain.UserVO">
 	select user_id , user_passwd , user_name from user where user_id = #{user_id} and user_passwd = #{user_passwd}
 </select>

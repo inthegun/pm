@@ -8,6 +8,7 @@ public class CommentVO {
 	private Long post_id;
 	private String comment_contact;
 	private Date comment_date;
+	
 	public Long getComment_no() {
 		return comment_no;
 	}
@@ -38,7 +39,6 @@ public class CommentVO {
 	public void setComment_date(Date comment_date) {
 		this.comment_date = comment_date;
 	}
-	
 	
 	
 }

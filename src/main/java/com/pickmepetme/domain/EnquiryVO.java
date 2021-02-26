@@ -3,12 +3,11 @@ package com.pickmepetme.domain;
 import java.util.Date;
 
 public class EnquiryVO {
-	private Long enquiry_no; // 
-	private String user_id; // 
-	private String enquiry_title; // 
-	private String enqurty_contact; // 
-	private Date Enquiry_date; //
-	
+	private Long enquiry_no;
+	private String user_id;
+	private String enquiry_title;
+	private String enqurty_contact;
+	private Date Enquiry_date;
 	public Long getEnquiry_no() {
 		return enquiry_no;
 	}
@@ -39,7 +38,6 @@ public class EnquiryVO {
 	public void setEnquiry_date(Date enquiry_date) {
 		Enquiry_date = enquiry_date;
 	}
-	
 	
 	
 }

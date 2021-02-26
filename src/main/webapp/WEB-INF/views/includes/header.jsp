@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="UTF-8">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <head>
 
@@ -36,7 +37,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-dog fa-fw"></i>
                 </div>
@@ -112,7 +113,7 @@
                 <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">community:</h6>
-                        <a class="collapse-item" href="../community/free_community/list">자유</a>
+                        <a class="collapse-item" href="../../community/free_community/list">자유</a>
                         <a class="collapse-item" href="../best_community/list.jsp">추천</a>
                         <a class="collapse-item" href="../tip_community/list.jsp">TIP</a>
                         <a class="collapse-item" href="../besttip_community/list.jsp">베스트팁</a>
@@ -134,7 +135,7 @@
                         <h6 class="collapse-header">MyPage:</h6>
                         <a class="collapse-item" href="utilities-color.html">내가 쓴 글</a>
                         <a class="collapse-item" href="utilities-border.html">반려동물 정보</a>
-                        <a class="collapse-item" href="utilities-animation.html">회원 정보</a>
+                        <a class="collapse-item" href="../../member/info">회원 정보</a>
                         <a class="collapse-item" href="utilities-other.html">최근 거래 내역</a>
                     </div>
                 </div>
@@ -249,16 +250,37 @@
                                 </form>
                             </div>
                         </li>
+                        
+                        <%-- 메인페이지 아이디 비밀번호 입력  --%>
+                        <c:if test="${member == null }"> <%-- 로그인 안되어있을때 --%>
+                        <span class="mr-2 d-none d-lg-inline text-gray-600 small"><br>
+                        <form id="login-form" class="form" action="/member/login_ok" method="post">
+                                <input type="text" name="user_id" id="user_id" placeholder="아이디 입력" >      
+                                <input type="password" name="user_passwd" id="user_passwd" placeholder="비밀번호 입력" style="margin-left:5px">
+                                <input type="submit" name="submit" class="btn btn-info btn-md" value="submit" style="margin-left:10px">
+                        </form>
+                        </span>
+                        </c:if> <%-- 로그인 안되어있을때 조건 종료  --%>
+                        
+                        <c:if test="${member != null }">  <%-- 로그인 되어있을때 --%>
+                        <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+                        <h6 style="margin-top:25px">${userName}님 환영합니다.</h6>
+<%--                         <a href='<c:url value="/member/logout"/>' role="button">로그아웃</a> --%>
+                        </span>
+                        </c:if><%-- 로그인 되어있을때  조건 종료 --%>
 
-                        <!-- Nav Item - Alerts -->
+                        
+
+<!--                         Nav Item - Alerts
+                        알람모양
                         <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-bell fa-fw"></i>
-                                <!-- Counter - Alerts -->
+                                Counter - Alerts
                                 <span class="badge badge-danger badge-counter">3+</span>
                             </a>
-                            <!-- Dropdown - Alerts -->
+                            Dropdown - Alerts
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="alertsDropdown">
                                 <h6 class="dropdown-header">
@@ -301,15 +323,15 @@
                             </div>
                         </li>
 
-                        <!-- Nav Item - Messages -->
+                        Nav Item - Messages
                         <li class="nav-item dropdown no-arrow mx-1">
                             <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-envelope fa-fw"></i>
-                                <!-- Counter - Messages -->
+                                Counter - Messages
                                 <span class="badge badge-danger badge-counter">7</span>
                             </a>
-                            <!-- Dropdown - Messages -->
+                            Dropdown - Messages
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="messagesDropdown">
                                 <h6 class="dropdown-header">
@@ -366,7 +388,7 @@
                                 <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
                             </div>
                         </li>
-
+ -->
                         <div class="topbar-divider d-none d-sm-block"></div>
 
                         <!-- Nav Item - User Information -->
@@ -379,7 +401,7 @@
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                 aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
+                                <a class="dropdown-item" href="member/info">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
                                 </a>
@@ -392,10 +414,21 @@
                                     Activity Log
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                
+                                    <c:if test="${member == null }"><%--  로그인 안되어있을때 --%>
+                                    <a class="dropdown-item" href="/member/login" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Login
+                                    </a>
+                                    </c:if>
+                                    <c:if test="${member != null }"><%--  로그인 되어있을때 --%>
+                                    <a class="dropdown-item" href="/member/logout" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
-                                </a>
+                                    </a>
+                                    </c:if>
+                                    
+                                
                             </div>
                         </li>
 
@@ -408,6 +441,5 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Tables</h1>
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

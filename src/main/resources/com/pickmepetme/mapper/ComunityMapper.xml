@@ -9,7 +9,32 @@
 
 <!-- list 목록 -->
 <select id="getList" resultType="com.pickmepetme.domain.ComunityVO">
-	select * from comunity where post_no > 0
+	
+select *
+from comunity
+order by post_no desc
+limit #{pageStart}, #{amount}
+			
 </select>
+
+<!-- 총 게시글의 수  -->
+<select id = "getTotalCount" resultType="int">
+			select count(*) from comunity
+		</select>
+		
+<select id = "pageview" resultType="com.pickmepetme.domain.ComunityVO">
+select
+user_id,
+post_no,
+post_title,
+post_contact,
+post_date from comunity
+where post_no = #{post_no}
+</select>		
+		
+<update id = "update" parameterType="com.pickmepetme.domain.ComunityVO">
+		UPDATE COMUNITY SET post_title = #{post_title}, post_contact = #{post_contact} WHERE post_no = #{post_no}
+</update>
+
 
 </mapper>

@@ -16,7 +16,7 @@
                                 <table class="table table-striped table-bordered table-hover" width="100%" cellspacing="0">
 
 
-<%-- <c:out value = "${free_list.post_no }" /> --%>
+<c:out value = "${frre_list.post_no }" />
                                     <thead>
                                     <!-- 1.목록이름 -->
                                     <tr>
@@ -32,28 +32,33 @@
                                     <c:forEach items="${free_list }" var = "list">
                                     	<tr>
                                     		<td><c:out value = "${list.post_no }" /></td>
-                                    		<td><c:out value = "${list.post_title }" /></td>
+                                    		<td><a href="/community/free_community/view?post_no=${list.post_no }">${list.post_title }</a></td>
                                     		<td><c:out value = "${list.post_contact }" /></td>
                                     		<td><c:out value = "${list.user_id }" /></td>
                                     		<td><fmt:formatDate pattern = "yyyy-MM-dd HH:mm" value = "${list.post_date }" /></td>
                                     	</tr>
                                     </c:forEach>
+                                    
+                                  
                                   </table>
                                 
                                 <!-- 3.페이징처리 -->
+                                <!-- 이전 -->
 								<c:if test = "${pageMaker.prev }">
-                                <a href = "/board/list?pageNum=${pageMaker.startPage -1}&amount=${pageMaker.cri.amount}">Previous</a>
+                                <a href = "/community/free_community/list?pageNum=${pageMaker.startPage -1}&amount=${pageMaker.cri.amount}">Previous</a>
                                 </c:if>
-                                
+
+								<!-- 번호 -->                                
                                 <c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }">
-                                <a href = "/board/list?pageNum=${num }&amount=${pageMaker.cri.amount}">
+                                <a href = "/community/free_community/list?pageNum=${num }&amount=${pageMaker.cri.amount}">
                                 ${num }</a>
                                 	
                                 </c:forEach>
                                 
+                                <!-- 다음 -->
                                 <c:if test = "${pageMaker.next }">
                                
-                                <a href = "/board/list?pageNum=${pageMaker.endPage+1 }&amount=${pageMaker.cri.amount}">Next</a>
+                                <a href = "/community/free_community/list?pageNum=${pageMaker.endPage+1 }&amount=${pageMaker.cri.amount}">Next</a>
 							                               
                                 </c:if>
 							

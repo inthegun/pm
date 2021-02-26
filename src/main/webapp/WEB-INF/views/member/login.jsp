@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<%@include file="../includes/header.jsp" %>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -95,8 +96,9 @@ body {
 
 </head>
 <body>
+<c:if test="${member == null }">
     <div id="login">
-        <h3 class="text-center text-white pt-5">Login form</h3>
+<!--         <h3 class="text-center text-white pt-5">Login form</h3> -->
         <div class="container">
             <div id="login-row" class="row justify-content-center align-items-center">
                 <div id="login-column" class="col-md-6">
@@ -110,7 +112,7 @@ body {
                             
                             <div class="form-group">
                                 <label for="password" class="text-info">Password:</label><br>
-                                <input type="text" name="user_passwd" id="user_passwd" class="form-control">
+                                <input type="password" name="user_passwd" id="user_passwd" class="form-control">
                             </div>
                             
                             	<c:if test="${msg == 'false' }">
@@ -118,7 +120,6 @@ body {
                             			아이디 또는 비밀번호가 일치하지 않습니다.
                             		</label>
                             	</c:if>
-                            
                             
                             <div class="form-group">
                                 <label for="remember-me" class="text-info"><span>Remember me</span> 
@@ -134,5 +135,13 @@ body {
             </div>
         </div>
     </div>
+    </c:if> <%-- 로그인 안되어있을때 --%>
+    
+    <c:if test="${member != null}"> <%-- 로그인 되어있을경우 --%>
+    잘못된 접근입니다.
+    </c:if>
+    
+    
+    <%@include file="../includes/footer.jsp"%>
 </body>
 </html>

@@ -4,42 +4,30 @@ package com.pickmepetme.domain;
 public class PageVO {
 
 	private Criteria cri; //pageNum , amount
-	private int total; // �� ���� ����
-	private boolean prev , next; // ���� ����
+	private int total; // 총 페이지 수
+	private boolean prev , next; // 이전 , 다음
 	private int startPage;
 	private int endPage;
-	
-	
 	
 	public Criteria getCri() {
 		return cri;
 	}
-
-
-
+	
 	public int getTotal() {
 		return total;
 	}
-
-
 
 	public boolean isPrev() {
 		return prev;
 	}
 
-
-
 	public boolean isNext() {
 		return next;
 	}
 
-
-
 	public int getStartPage() {
 		return startPage;
 	}
-
-
 
 	public int getEndPage() {
 		return endPage;
@@ -50,8 +38,6 @@ public class PageVO {
 		return "PageVO [cri=" + cri + ", total=" + total + ", prev=" + prev + ", next=" + next + ", startPage="
 				+ startPage + ", endPage=" + endPage + "]";
 	}
-
-
 
 	public PageVO (Criteria cri , int total) {
 		this.cri = cri;

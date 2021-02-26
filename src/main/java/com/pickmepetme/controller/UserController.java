@@ -76,13 +76,14 @@ public class UserController {
 				session.setAttribute("userId", user.getUser_id()); // id 
 				session.setAttribute("userName", user.getUser_name()); // name 
 				model.addAttribute("login", user);
-				return "home";
+				return "redirect:/";
 			}
 		
 		}
 		//로그아웃 처리
 		@GetMapping("logout")
 		public String  getLogout(HttpSession session) {
+			logger.info("로그아웃 처리됨");
 			session.invalidate();
 			return "redirect:/";
 		}

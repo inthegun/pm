@@ -3,12 +3,15 @@ package com.pickmepetme.domain;
 import java.util.Date;
 
 
+
+
+
 public class ComunityVO {
-	private Long post_no; //
-	private String user_id; //
-	private String post_title; //
-	private String post_contact; //
-	private Date post_date; //
+	private Long post_no;
+	private String user_id;
+	private String post_title;
+	private String post_contact;
+	private Date post_date;
 	
 	
 	public Long getPost_no() {

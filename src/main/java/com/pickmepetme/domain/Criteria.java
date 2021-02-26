@@ -4,8 +4,19 @@ public class Criteria {
 	private int pageNum;
 	private int amount;
 	
+	public int getPageStart() {
+		return (this.pageNum-1)*amount;
+	}
 	
+	public Criteria() {
+		this(1, 10);
+	}
 	
+	public Criteria(int pageNum, int amount) {
+		this.pageNum = pageNum;
+		this.amount = amount;
+	}
+
 	public int getPageNum() {
 		return pageNum;
 	}
@@ -22,18 +33,10 @@ public class Criteria {
 		this.amount = amount;
 	}
 
-	
 	@Override
 	public String toString() {
 		return "Criteria [pageNum=" + pageNum + ", amount=" + amount + "]";
 	}
-
-	public Criteria() {
-		this(1, 10);
-	}
 	
-	public Criteria(int pageNum, int amount) {
-		this.pageNum = pageNum;
-		this.amount = amount;
-	}
+	
 }
