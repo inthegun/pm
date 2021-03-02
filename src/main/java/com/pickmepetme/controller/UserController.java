@@ -83,9 +83,17 @@ public class UserController {
 		//로그아웃 처리
 		@GetMapping("logout")
 		public String  getLogout(HttpSession session) {
-			logger.info("로그아웃 처리됨");
-			session.invalidate();
-			return "redirect:/";
+			logger.info("로그아웃 처리 호출");
+			String check = (String) session.getAttribute("member");
+			if(check != null) {
+				logger.info("로그아웃 처리됨");
+				session.invalidate();
+				return "redirect:/";
+			}else {
+				logger.info("비정상적 로그아웃 접근됨");
+				return "redirect:/member/login";
+			}
+			
 		}
 		
 		// 회원 정보 조회

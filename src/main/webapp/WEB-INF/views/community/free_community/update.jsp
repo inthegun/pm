@@ -5,42 +5,37 @@
 
 <%@include file="../../includes/header.jsp" %>
 
+<%
+ 
+    request.setCharacterEncoding("UTF-8");
+ 
+%>
+
 <html>
 <head>
-<title></title>
+<meta charset = "UTF-8">
+<title>게시물 목록</title>
 </head>
 <body>
 
-	<form method="post">
+	<form method = "post" accept-charset="utf-8">
+	<label>제목</label>
+	<input type = "text" name = "post_title" value = "${view.post_title }"/><br/>
 	
-		<input type="hidden" name="post_no" value="${view.post_no}" />
+	<label>작성자</label>
+	<input type = "text" name = "user_id" value = "${view.user_id }" readonly="readonly"/><br/>
 	
-		<div>
-			<label>제목</label> <input type="text" name="post_title" value="${view.post_title}" />
-		</div>
-
-		<div>
-			<label>작성자</label> <input type="text" name="user_id" value="${view.user_id}" readonly="readonly" />
-		</div>
-
-		<div>
-			<label>작성날짜</label> 
-			<%-- <fmt:formatDate value="${view.regDate}" pattern="yyyy-MM-dd" />  --%>
-			
-			<input type="text" name="post_date"
-					value="<fmt:formatDate value="${view.post_date}" pattern="yyyy-MM-dd" />" readonly="readonly" />
-		</div>
-		
-		<div>
-			<label>내용</label>
-			<textarea rows="5" cols="50" name="post_contact" >${view.post_contact}</textarea>
-		</div>
-		
-		<div>
-			<button type="submit">수정</button>
-		</div>
-		
-		
+	<label>내용</label>
+	<textarea cols = "200" rows = "10"name = "post_contact">"${view.post_contact }"</textarea><br/>
+	
+	<button type = "submit">완료</button>
+	<button type="submit" id="back_Btn">취소</button>
+				
+				<script>
+					$("#back_Btn").click(function(){
+						history.back();
+					});			
+				</script>
 	</form>
 
 </body>

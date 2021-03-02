@@ -16,9 +16,12 @@ public interface ComunityService {
 	public int getTotal(Criteria cri);
 	
 	//수정
-	public boolean update(ComunityVO cvo);
+	public void update(ComunityVO vo) throws Exception;
 
 
 	// 글 보기
 	public ComunityVO pageview(int post_no);
+	
+	//삭제
+	public void delete(int post_no) throws Exception;
 }

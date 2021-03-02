@@ -10,18 +10,69 @@
 <!-- list 목록 -->
 <select id="getList" resultType="com.pickmepetme.domain.ComunityVO">
 	
-select *
-from comunity
-order by post_no desc
-limit #{pageStart}, #{amount}
+	select *
+	from comunity
+	
+	<trim prefix="WHERE" prefixOverrides="AND|OR">
+
+			<if test='type=="T"'>
+
+				AND POST_TITLE like CONCAT('%', #{keyword}, '%')
+
+			</if>
+
+			<if test='type=="C"'>
+
+				AND POST_CONTACT like CONCAT('%', #{keyword}, '%')
+
+			</if>
+
+			<if test='type=="W"'>
+
+				AND user_id like CONCAT('%', #{keyword}, '%')
+
+			</if>	
+
+		</trim>
+
+	order by post_no desc
+	limit #{pageStart}, #{amount}
 			
 </select>
 
 <!-- 총 게시글의 수  -->
 <select id = "getTotalCount" resultType="int">
-			select count(*) from comunity
-		</select>
-		
+	select count(*) from comunity
+	
+	<trim prefix="WHERE" prefixOverrides="AND|OR">
+
+<if test='keyword != null and keyword != "" '>
+
+			<if test='type=="T"'>
+
+				AND POST_TITLE like CONCAT('%', #{keyword}, '%')
+
+			</if>
+
+			<if test='type=="C"'>
+
+				AND POST_CONTACT like CONCAT('%', #{keyword}, '%')
+
+			</if>
+
+			<if test='type=="W"'>
+
+				AND user_id like CONCAT('%', #{keyword}, '%')
+
+			</if>
+
+      </if>
+
+	</trim>
+
+
+</select>
+
 <select id = "pageview" resultType="com.pickmepetme.domain.ComunityVO">
 select
 user_id,
@@ -35,6 +86,13 @@ where post_no = #{post_no}
 <update id = "update" parameterType="com.pickmepetme.domain.ComunityVO">
 		UPDATE COMUNITY SET post_title = #{post_title}, post_contact = #{post_contact} WHERE post_no = #{post_no}
 </update>
+
+<!-- 삭제 -->
+<delete id = "delete" parameterType="int">
+delete from COMUNITY
+where post_no = #{post_no}
+
+</delete>
 
 
 </mapper>

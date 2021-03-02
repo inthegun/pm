@@ -33,17 +33,27 @@ public class ComunityServiceImpl implements ComunityService{
 		
 	}
 
-	@Override
-	public boolean update(ComunityVO cvo) {
-		logger.info("ComunityServiceImpl update를 실행합니다.");
-		return comunityMapper.update(cvo);
-	}
+	//수정
+		@Override
+		public void update(ComunityVO vo) throws Exception {
+			logger.info("ComunityServiceImpl update를 실행합니다.");
+			comunityMapper.update(vo);
+			
+		}
 
 	@Override
 	public ComunityVO pageview(int post_no) {
 		logger.info("ComunityServiceImpl pageview를 실행합니다.");
 		return comunityMapper.pageview(post_no);
 	}
+
+	//삭제
+		@Override
+		public void delete(int post_no) throws Exception {
+			logger.info("ComunityServiceImpl delete를 실행합니다.");
+			comunityMapper.delete(post_no);
+			
+		}
 
 	
 	

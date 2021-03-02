@@ -12,10 +12,13 @@ public interface ComunityMapper {
 	// 전체 글 수
 	public int getTotalCount(Criteria cri);
 
-	// 수정
-	public boolean update(ComunityVO cvo);
+	//수정
+	public void update(ComunityVO vo) throws Exception;
 	
 	// 글보기
 	public ComunityVO pageview(int post_no);
+	
+	//삭제
+	public void delete(int post_no) throws Exception;
 }
 

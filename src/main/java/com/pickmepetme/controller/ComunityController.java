@@ -1,5 +1,7 @@
 package com.pickmepetme.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +56,7 @@ public class ComunityController {
 		
 		
 		
-		
+		/*
 		// 게시물 수정
 			@RequestMapping(value = "/free_community/update", method = RequestMethod.GET)
 			public String getUpdate(@RequestParam("post_no") int post_no, Model model) throws Exception {
@@ -63,8 +65,32 @@ public class ComunityController {
 				
 				model.addAttribute("view", view);
 				return "community/free_community/update";
-			}
-	
+			}*/
+		
+		//수정 폼
+				@RequestMapping(value = "/free_community/update", method = RequestMethod.GET)
+				public void getUpdate(@RequestParam("post_no") int post_no, Model model) throws Exception{
+					
+					ComunityVO vo = comunityService.pageview(post_no);
+					
+					model.addAttribute("view", vo);
+					
+					
+				}
+				
+		// 수정처리
+		@RequestMapping(value = "/free_community/update", method = RequestMethod.POST)
+		public String postUpdate(ComunityVO vo, HttpServletRequest hsq) throws Exception{
+			comunityService.update(vo);
+			return "redirect:/community/free_community/view?post_no=" + vo.getPost_no();
+		}	
+		
+		//게시글삭제
+		@RequestMapping(value="/free_community/delete", method = RequestMethod.GET)
+		public String getDelete(@RequestParam("post_no") int post_no)throws Exception{
+			comunityService.delete(post_no);
+			return "redirect:/community/free_community/list";
+		}
 	
 
 }
