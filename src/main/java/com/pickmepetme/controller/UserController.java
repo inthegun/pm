@@ -84,7 +84,7 @@ public class UserController {
 		@GetMapping("logout")
 		public String  getLogout(HttpSession session) {
 			logger.info("로그아웃 처리 호출");
-			String check = (String) session.getAttribute("member");
+			String check = (String) session.getAttribute("userId");
 			if(check != null) {
 				logger.info("로그아웃 처리됨");
 				session.invalidate();

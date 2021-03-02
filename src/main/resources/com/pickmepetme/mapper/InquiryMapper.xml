@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="com.pickmepetme.mapper.InquiryMapper">
+	
+<!-- EnquiryMapper sql문 작성하는 곳입니다. -->
+
+
+<!-- 1대1 문의 리스트  -->
+<select id="getList" resultType="com.pickmepetme.domain.InquiryVO">
+	select * from ENQUIRY where user_id = #{user_id} ;
+</select>
+
+<!-- 1대1 문의 작성 -->
+<insert id="registerInquiry">
+INSERT INTO ENQUIRY (user_id,enquiry_title,enquiry_contact) 
+VALUES (#{user_id}, #{enquiry_title}, #{enquiry_contact} )
+	
+</insert>
+
+</mapper>

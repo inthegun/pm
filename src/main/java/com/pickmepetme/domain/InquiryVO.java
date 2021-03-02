@@ -2,12 +2,13 @@ package com.pickmepetme.domain;
 
 import java.util.Date;
 
-public class EnquiryVO {
-	private Long enquiry_no;
-	private String user_id;
-	private String enquiry_title;
-	private String enqurty_contact;
-	private Date Enquiry_date;
+public class InquiryVO {
+	private Long enquiry_no;  // 번호
+	private String user_id; // 유저 아이디
+	private String enquiry_title; // 문의명
+	private String enquiry_contact; // 문의 내용
+	private Date Enquiry_date; // 날짜
+	
 	public Long getEnquiry_no() {
 		return enquiry_no;
 	}
@@ -26,11 +27,13 @@ public class EnquiryVO {
 	public void setEnquiry_title(String enquiry_title) {
 		this.enquiry_title = enquiry_title;
 	}
-	public String getEnqurty_contact() {
-		return enqurty_contact;
+	
+	
+	public String getEnquiry_contact() {
+		return enquiry_contact;
 	}
-	public void setEnqurty_contact(String enqurty_contact) {
-		this.enqurty_contact = enqurty_contact;
+	public void setEnquiry_contact(String enquiry_contact) {
+		this.enquiry_contact = enquiry_contact;
 	}
 	public Date getEnquiry_date() {
 		return Enquiry_date;

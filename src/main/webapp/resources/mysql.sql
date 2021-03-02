@@ -22,6 +22,8 @@ CREATE TABLE ENQUIRY(
 <--! 외래키 설정-->
 alter table ENQUIRY add constraint ue_id foreign key(user_id) references USER(user_id) ON UPDATE CASCADE
 
+desc enquiry
+
 <--! 커뮤니티 TABLE-->
 CREATE TABLE COMUNITY(
 	post_no int not null AUTO_INCREMENT PRIMARY KEY,
@@ -66,3 +68,5 @@ select * from user where user_id=#{user_id}
 
 insert into user(user_id,user_passwd,user_name,user_birth,user_addr,user_phone,user_sex,user_email,user_date) 
 values("leesemin","1234","이세민","1996-03-07","주소","01012341234","1","email",NOW())
+
+select * from ENQUIRY

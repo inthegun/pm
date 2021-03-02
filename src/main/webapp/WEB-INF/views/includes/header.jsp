@@ -182,8 +182,8 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">HELP:</h6>
-                        <a class="collapse-item" href="utilities-color.html">자주묻는질문</a>
-                        <a class="collapse-item" href="utilities-border.html">1:1문의</a>
+                        <a class="collapse-item" href="/inquiry/FAQ">자주묻는질문</a>
+                        <a class="collapse-item" href="/inquiry/inquirylist">1:1문의</a>
                     </div>
                 </div>
             </li>
