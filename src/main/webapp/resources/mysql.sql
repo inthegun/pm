@@ -32,6 +32,8 @@ CREATE TABLE COMUNITY(
 	post_contact varchar(500) not null,
 	post_date datetime not null DEFAULT NOW()
 )
+
+alter table comunity add(Hit int Default 0);
 <--! 외래키 설정-->
 alter table COMUNITY add constraint uc_id foreign key(user_id) references USER(user_id) ON UPDATE CASCADE
 
@@ -70,3 +72,9 @@ insert into user(user_id,user_passwd,user_name,user_birth,user_addr,user_phone,u
 values("leesemin","1234","이세민","1996-03-07","주소","01012341234","1","email",NOW())
 
 select * from ENQUIRY
+
+select user_id , enquiry_title ,enquiry_contact from ENQUIRY
+where enquiry_no=3 and user_id='test'
+
+select user_id , enquiry_title ,enquiry_contact from ENQUIRY
+where  enquiry_no=2

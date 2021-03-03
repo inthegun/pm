@@ -1,98 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE mapper
-	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-	<mapper namespace="com.pickmepetme.mapper.ComunityMapper">
-	
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   <mapper namespace="com.pickmepetme.mapper.ComunityMapper">
+   
 <!-- ComunityMapper sql문 작성하는 곳입니다. -->
 
 <!-- list 목록 -->
 <select id="getList" resultType="com.pickmepetme.domain.ComunityVO">
-	
-	select *
-	from comunity
-	
-	<trim prefix="WHERE" prefixOverrides="AND|OR">
-
-			<if test='type=="T"'>
-
-				AND POST_TITLE like CONCAT('%', #{keyword}, '%')
-
-			</if>
-
-			<if test='type=="C"'>
-
-				AND POST_CONTACT like CONCAT('%', #{keyword}, '%')
-
-			</if>
-
-			<if test='type=="W"'>
-
-				AND user_id like CONCAT('%', #{keyword}, '%')
-
-			</if>	
-
-		</trim>
-
-	order by post_no desc
-	limit #{pageStart}, #{amount}
-			
+   select *
+   from comunity
+   <trim prefix="WHERE" prefixOverrides="AND|OR">
+         <if test='type=="T"'>
+            AND POST_TITLE like CONCAT('%', #{keyword}, '%')
+         </if>
+         <if test='type=="C"'>
+            AND POST_CONTACT like CONCAT('%', #{keyword}, '%')
+         </if>
+         <if test='type=="W"'>
+            AND user_id like CONCAT('%', #{keyword}, '%')
+         </if>   
+      </trim>
+   order by post_no desc
+   limit #{pageStart}, #{amount}
 </select>
 
 <!-- 총 게시글의 수  -->
 <select id = "getTotalCount" resultType="int">
-	select count(*) from comunity
-	
-	<trim prefix="WHERE" prefixOverrides="AND|OR">
-
+   select count(*) from comunity
+   <trim prefix="WHERE" prefixOverrides="AND|OR">
 <if test='keyword != null and keyword != "" '>
-
-			<if test='type=="T"'>
-
-				AND POST_TITLE like CONCAT('%', #{keyword}, '%')
-
-			</if>
-
-			<if test='type=="C"'>
-
-				AND POST_CONTACT like CONCAT('%', #{keyword}, '%')
-
-			</if>
-
-			<if test='type=="W"'>
-
-				AND user_id like CONCAT('%', #{keyword}, '%')
-
-			</if>
-
+         <if test='type=="T"'>
+            AND POST_TITLE like CONCAT('%', #{keyword}, '%')
+         </if>
+         <if test='type=="C"'>
+            AND POST_CONTACT like CONCAT('%', #{keyword}, '%')
+         </if>
+         <if test='type=="W"'>
+            AND user_id like CONCAT('%', #{keyword}, '%')
+         </if>
       </if>
-
-	</trim>
-
+   </trim>
 
 </select>
 
+<!-- 글 상세조회 -->
 <select id = "pageview" resultType="com.pickmepetme.domain.ComunityVO">
 select
 user_id,
 post_no,
 post_title,
 post_contact,
+hit,
 post_date from comunity
 where post_no = #{post_no}
-</select>		
-		
+</select>      
+      
+<!-- 글수정  -->      
 <update id = "update" parameterType="com.pickmepetme.domain.ComunityVO">
-		UPDATE COMUNITY SET post_title = #{post_title}, post_contact = #{post_contact} WHERE post_no = #{post_no}
+      UPDATE COMUNITY SET post_title = #{post_title}, post_contact = #{post_contact} WHERE post_no = #{post_no}
 </update>
 
-<!-- 삭제 -->
+<!-- 글삭제 -->
 <delete id = "delete" parameterType="int">
 delete from COMUNITY
 where post_no = #{post_no}
 
 </delete>
+
+<!-- SQL hit 컬럼 추가  -->
+<!-- 게시판 조회+1  -->
+<update id="comunityHit" parameterType="int">
+   UPDATE comunity set
+   hit = hit+1
+   where post_no = #{post_no}
+</update>
+
+<!-- 이미지 등록 -->
+<insert id="register">
+ insert into comunity (post_no, user_id, post_title, post_contact, post_date, hit,
+       gdsImg, gdsThumbImg)
+     values (#{post_no}, #{user_id}, #{post_title}, #{post_contact}, #{post_date}, #{hit},
+        #{gdsImg}, #{gdsThumbImg})
+</insert>
+
+<!-- 글 삽입 -->
+<insert id="insertBoard">
+insert into comunity(user_id, post_title, post_contact, post_date)
+values(#{user_id} , #{post_title}, #{post_contact}, NOW())
+</insert>
 
 
 </mapper>

@@ -3,6 +3,7 @@
     
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
     
       <%@include file="../includes/header.jsp" %>
 <!DOCTYPE html>
@@ -33,9 +34,12 @@
 	
 	<%-- 테이블 내용  --%>
 	<c:forEach items="${inquiryvo }" var="list">
+	<c:set var="i" value="${i+1 }"/>
+	<c:set var="enquiry_no" value="${list.enquiry_no }"/>
 		<tr>
-			<td><c:out value = "${list.enquiry_no }" /></td>
-            <td><a href="/inquiry/inquiry_view/?post_no=${list.enquiry_no }">${list.enquiry_title }</a></td>
+		
+			<td><c:out value ="${i}" /></td>
+            <td><a href="/inquiry/inquiry_view?no=${enquiry_no}">${list.enquiry_title }</a></td>
             <td><c:out value = "${list.enquiry_contact }" /></td>
             <td><fmt:formatDate pattern = "yyyy-MM-dd HH:mm" value = "${list.enquiry_date }" /></td>
 		</tr>

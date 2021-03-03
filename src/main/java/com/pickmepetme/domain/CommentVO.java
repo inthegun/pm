@@ -3,16 +3,15 @@ package com.pickmepetme.domain;
 import java.util.Date;
 
 public class CommentVO {
-	private Long comment_no;
+	private int comment_no;
 	private String user_id;
-	private Long post_id;
+	private int post_id;
 	private String comment_contact;
 	private Date comment_date;
-	
-	public Long getComment_no() {
+	public int getComment_no() {
 		return comment_no;
 	}
-	public void setComment_no(Long comment_no) {
+	public void setComment_no(int comment_no) {
 		this.comment_no = comment_no;
 	}
 	public String getUser_id() {
@@ -21,10 +20,10 @@ public class CommentVO {
 	public void setUser_id(String user_id) {
 		this.user_id = user_id;
 	}
-	public Long getPost_id() {
+	public int getPost_id() {
 		return post_id;
 	}
-	public void setPost_id(Long post_id) {
+	public void setPost_id(int post_id) {
 		this.post_id = post_id;
 	}
 	public String getComment_contact() {
@@ -39,6 +38,7 @@ public class CommentVO {
 	public void setComment_date(Date comment_date) {
 		this.comment_date = comment_date;
 	}
+	
 	
 	
 }

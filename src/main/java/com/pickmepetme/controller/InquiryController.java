@@ -61,8 +61,6 @@ public class InquiryController {
 		public String inquiryview(@RequestParam("inquiry_no")int inquiry_no,Model model) throws Exception{
 			logger.info("1대1 문의 보기 호출됨");
 			
-			
-			
 			return "";
 		}
 		
@@ -80,14 +78,23 @@ public class InquiryController {
 		@RequestMapping(value="inquiry_register",method=RequestMethod.POST)
 		public String Doinquiryregister(InquiryVO inquiryvo , Model model,HttpSession session) {
 			logger.info("1대1 문의 작성 처리 호출됨");
-			
-			
-			
 			inquiryservice.registerInquiry(inquiryvo,session);
 			
 			return "redirect:/inquiry/inquirylist";
 		}
 		
+		// 1대1 문의 보기 
+		@RequestMapping(value="inquiry_view",method=RequestMethod.GET)
+		public String getInquiryView(@RequestParam("no") int no, InquiryVO inquiryvo,Model model) throws Exception {
+			
+			logger.info("1대1 문의 보기 호출됨 ");
+			
+			inquiryvo = inquiryservice.pageview(no);
+			
+			model.addAttribute("view", inquiryvo);
+			
+			return "inquiry/inquiry_view";
+		}
 		
 		
 		

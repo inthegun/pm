@@ -24,4 +24,11 @@ public interface ComunityService {
 	
 	//삭제
 	public void delete(int post_no) throws Exception;
+	
+	   //게시판 조회 +1
+	   public boolean comunityHit(int post_no) throws Exception;
+
+
+	   //글삽입
+	public void insertBoard(ComunityVO comunityvo);
 }

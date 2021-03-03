@@ -36,10 +36,18 @@ private static final Logger logger = LoggerFactory.getLogger(InquiryServiceImpl.
 		logger.info("1대1문의 작성 호출됨 ");
 		
 		inquiryvo.setUser_id((String)session.getAttribute("userId"));
-		logger.info("inquiryvo.getUser_id 값 :"+inquiryvo.getUser_id());
 
 		inquirymapper.registerInquiry(inquiryvo); 
 		
+	}
+
+
+	// 1대1 문의 보기
+	@Override
+	public InquiryVO pageview(int no) {
+		logger.info("InquiryServiceImpl 글 보기 실행됨 ");
+		
+		return inquirymapper.pageview(no);
 	}
 
 	

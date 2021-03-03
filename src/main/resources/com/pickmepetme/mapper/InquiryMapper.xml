@@ -20,4 +20,11 @@ VALUES (#{user_id}, #{enquiry_title}, #{enquiry_contact} )
 	
 </insert>
 
+<!-- 1대1 문의 보기 -->
+<select id="pageview"  resultType="com.pickmepetme.domain.InquiryVO">
+select user_id , enquiry_title,enquiry_contact from ENQUIRY
+where enquiry_no=#{arg0}
+</select>
+
+
 </mapper>
