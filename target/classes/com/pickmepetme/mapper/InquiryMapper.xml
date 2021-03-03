@@ -23,7 +23,7 @@ VALUES (#{user_id}, #{enquiry_title}, #{enquiry_contact} )
 <!-- 1대1 문의 보기 -->
 <select id="pageview"  resultType="com.pickmepetme.domain.InquiryVO">
 select user_id , enquiry_title,enquiry_contact from ENQUIRY
-where enquiry_no=#{arg0}
+where enquiry_no=#{arg0} and user_id=#{arg1}
 </select>
 
 

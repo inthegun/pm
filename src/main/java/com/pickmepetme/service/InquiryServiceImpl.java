@@ -44,10 +44,10 @@ private static final Logger logger = LoggerFactory.getLogger(InquiryServiceImpl.
 
 	// 1대1 문의 보기
 	@Override
-	public InquiryVO pageview(int no) {
+	public InquiryVO pageview(int no,String userid) {
 		logger.info("InquiryServiceImpl 글 보기 실행됨 ");
 		
-		return inquirymapper.pageview(no);
+		return inquirymapper.pageview(no,userid);
 	}
 
 	

@@ -36,10 +36,11 @@
 	<c:forEach items="${inquiryvo }" var="list">
 	<c:set var="i" value="${i+1 }"/>
 	<c:set var="enquiry_no" value="${list.enquiry_no }"/>
+	<c:set var="userid" value="${list.user_id }"/>
 		<tr>
 		
 			<td><c:out value ="${i}" /></td>
-            <td><a href="/inquiry/inquiry_view?no=${enquiry_no}">${list.enquiry_title }</a></td>
+            <td><a href="/inquiry/inquiry_view?no=${enquiry_no}&userid=${userid}">${list.enquiry_title }</a></td>
             <td><c:out value = "${list.enquiry_contact }" /></td>
             <td><fmt:formatDate pattern = "yyyy-MM-dd HH:mm" value = "${list.enquiry_date }" /></td>
 		</tr>

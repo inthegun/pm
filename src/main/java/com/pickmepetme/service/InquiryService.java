@@ -15,7 +15,11 @@ public interface InquiryService {
 	// 1대1 문의 작성
 	public void registerInquiry(InquiryVO inquiryvo,HttpSession session);
 
+	
 	// 1대1 문의 보기 
-	public InquiryVO pageview(int no);
+	public InquiryVO pageview(int no, String userid);
+
+	
+	
 
 }

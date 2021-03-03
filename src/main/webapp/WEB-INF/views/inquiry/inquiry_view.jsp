@@ -12,15 +12,17 @@
 <title>고객문의 글 보기</title>
 </head>
 <body>
+<c:if test="${param.userid eq sessionScope.userId }">
 			<label>제목</label> ${view.enquiry_title }
 			<br/>
 			<label>작성자</label> ${view.user_id }
 			<br/>
 			<label>내용</label> ${view.enquiry_contact }
-			
+</c:if>
+<c:if test="${param.userid ne sessionScope.userId }">
+	잘못된 접근 
+</c:if>
 
-		
-		
 		
 </body>
 </html>
