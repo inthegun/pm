@@ -34,6 +34,8 @@ CREATE TABLE COMUNITY(
 )
 
 alter table comunity add(Hit int Default 0);
+alter table comunity add (gdsThumbImg varchar(200));
+alter table comunity add (gdsImg varchar(200));
 <--! 외래키 설정-->
 alter table COMUNITY add constraint uc_id foreign key(user_id) references USER(user_id) ON UPDATE CASCADE
 

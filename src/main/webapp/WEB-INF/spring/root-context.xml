@@ -37,7 +37,7 @@
 	
 	<mybatis-spring:scan base-package="com.pickmepetme.mapper"/>
 	<context:component-scan base-package="com.pickmepetme.service"></context:component-scan>
-	
+	<context:component-scan base-package="com.pickmepetme.utils"></context:component-scan>
 	
 		
 </beans>

@@ -17,7 +17,6 @@
 <meta charset="UTF-8">
 
 
-   </script>
 </head>
 
 <body>
@@ -48,10 +47,10 @@
                                     </thead>
                                     
                                     <!-- 테이블내용 -->
-                                    <c:forEach items="${free_list }" var = "list">
+                                    <c:forEach items="${tip_list }" var = "list">
                                        <tr style="text-align:center; width:100%;">
                                            <td style="width:10%"><c:out value = "${list.post_no }" /></td>
-                                          <td style="width:50%"><a href="/community/free_community/view?post_no=${list.post_no }">${list.post_title }</a></td>
+                                          <td style="width:50%"><a href="/community/tip_community/view?post_no=${list.post_no }">${list.post_title }</a></td>
                                           <td style="width:15%"><c:out value = "${list.user_id }" /></td>
                                           <td style="width:15%"><fmt:formatDate pattern = "yyyy-MM-dd HH:mm" value = "${list.post_date }" /></td>
                                           <td style="width:10%"><c:out value = "${list.hit}" /></td>
@@ -125,7 +124,7 @@
                         <button type="submit" class="btn btn-info btn-md">Search</button>
                         
                         <c:if test="${member ne null }">
-                        <button type="button" class="btn btn-info btn-md" onclick="location.href='/community/free_community/insert'" style="float: right;">글쓰기</button>
+                        <button type="button" class="btn btn-info btn-md" onclick="location.href='/community/tip_community/insert'" style="float: right;">글쓰기</button>
                         </c:if>
                         
                         

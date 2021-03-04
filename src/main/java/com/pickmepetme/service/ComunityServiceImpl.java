@@ -66,13 +66,49 @@ public class ComunityServiceImpl implements ComunityService{
          
       }
 
-      //글 삽입 
 	@Override
 	public void insertBoard(ComunityVO comunityvo) {
 		logger.info("커뮤니티 서비스Impl insert 실행함");
 		
 		comunityMapper.insertBoard(comunityvo);
 		
+	}
+	
+	/* 팁 게시판 구현 */
+
+	@Override
+	public List<ComunityVO> tipgetList(Criteria cri) {
+		return comunityMapper.tipgetList(cri);
+	}
+
+	@Override
+	public int tipgetTotalCount(Criteria cri) {
+		 return comunityMapper.tipgetTotalCount(cri);
+	}
+
+	@Override
+	public void tipupdate(ComunityVO vo) throws Exception {
+		comunityMapper.tipupdate(vo);
+	}
+
+	@Override
+	public ComunityVO tippageview(int post_no) {
+		return comunityMapper.tippageview(post_no);
+	}
+
+	@Override
+	public void tipdelete(int post_no) throws Exception {
+		 comunityMapper.tipdelete(post_no);
+	}
+
+	@Override
+	public boolean tipcomunityHit(int post_no) throws Exception {
+		return comunityMapper.tipcomunityHit(post_no);
+	}
+
+	@Override
+	public void tipinsertBoard(ComunityVO comunityvo) {
+		comunityMapper.tipinsertBoard(comunityvo);
 	}
 
       

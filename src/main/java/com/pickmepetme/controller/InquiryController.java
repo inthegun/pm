@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.pickmepetme.domain.InquiryVO;
 import com.pickmepetme.service.InquiryService;
-import com.pickmepetme.service.UserService;
 
 @Controller
 @RequestMapping("/inquiry/*")
@@ -26,9 +25,6 @@ public class InquiryController {
 		// 의존 자동 주입
 		@Autowired
 		InquiryService inquiryservice;
-		
-		@Autowired
-		UserService userservice;
 		
 		
 		//자주 묻는 질문 
@@ -60,6 +56,13 @@ public class InquiryController {
 			return "inquiry/inquirylist";
 		}
 		
+		// 1대1 문의 보기 
+		@RequestMapping(value="inquiry_view")
+		public String inquiryview(@RequestParam("inquiry_no")int inquiry_no,Model model) throws Exception{
+			logger.info("1대1 문의 보기 호출됨");
+			
+			return "";
+		}
 		
 		
 		// 1대1 문의 작성 폼
@@ -82,16 +85,16 @@ public class InquiryController {
 		
 		// 1대1 문의 보기 
 		@RequestMapping(value="inquiry_view",method=RequestMethod.GET)
-		public String getInquiryView(@RequestParam("no") int no,@RequestParam("userid") String userid, InquiryVO inquiryvo,Model model) throws Exception {
-			
-			logger.info("1대1 문의 보기 호출됨 ");
-			
-			inquiryvo = inquiryservice.pageview(no,userid);
-			
-			model.addAttribute("view", inquiryvo);
-			
-			return "inquiry/inquiry_view";
-		}
+        public String getInquiryView(@RequestParam("no") int no,@RequestParam("userid") String userid, InquiryVO inquiryvo,Model model) throws Exception {
+
+            logger.info("1대1 문의 보기 호출됨 ");
+
+            inquiryvo = inquiryservice.pageview(no,userid);
+
+            model.addAttribute("view", inquiryvo);
+
+            return "inquiry/inquiry_view";
+        }
 		
 		
 		

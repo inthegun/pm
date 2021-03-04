@@ -53,7 +53,9 @@ post_no,
 post_title,
 post_contact,
 hit,
-post_date from comunity
+post_date,
+gdsThumbImg,
+gdsImg from comunity
 where post_no = #{post_no}
 </select>      
       
@@ -87,9 +89,103 @@ where post_no = #{post_no}
 
 <!-- 글 삽입 -->
 <insert id="insertBoard">
-insert into comunity(user_id, post_title, post_contact, post_date)
-values(#{user_id} , #{post_title}, #{post_contact}, NOW())
+insert into comunity(user_id, post_title, post_contact, post_date ,gdsImg, gdsThumbImg)
+values(#{user_id} , #{post_title}, #{post_contact}, NOW(), #{gdsImg}, #{gdsThumbImg})
 </insert>
+
+
+
+
+
+
+<!--  팁 게시판 관련 SQL  -->
+
+<!-- list 목록 -->
+<select id="tipgetList" resultType="com.pickmepetme.domain.ComunityVO">
+   select *
+   from tip_comunity
+   <trim prefix="WHERE" prefixOverrides="AND|OR">
+         <if test='type=="T"'>
+            AND POST_TITLE like CONCAT('%', #{keyword}, '%')
+         </if>
+         <if test='type=="C"'>
+            AND POST_CONTACT like CONCAT('%', #{keyword}, '%')
+         </if>
+         <if test='type=="W"'>
+            AND user_id like CONCAT('%', #{keyword}, '%')
+         </if>   
+      </trim>
+   order by post_no desc
+   limit #{pageStart}, #{amount}
+</select>
+
+<!-- 총 게시글의 수  -->
+<select id = "tipgetTotalCount" resultType="int">
+   select count(*) from tip_comunity
+   <trim prefix="WHERE" prefixOverrides="AND|OR">
+<if test='keyword != null and keyword != "" '>
+         <if test='type=="T"'>
+            AND POST_TITLE like CONCAT('%', #{keyword}, '%')
+         </if>
+         <if test='type=="C"'>
+            AND POST_CONTACT like CONCAT('%', #{keyword}, '%')
+         </if>
+         <if test='type=="W"'>
+            AND user_id like CONCAT('%', #{keyword}, '%')
+         </if>
+      </if>
+   </trim>
+
+</select>
+
+<!-- 글 상세조회 -->
+<select id = "tippageview" resultType="com.pickmepetme.domain.ComunityVO">
+select
+user_id,
+post_no,
+post_title,
+post_contact,
+hit,
+post_date,
+gdsThumbImg,
+gdsImg from tip_comunity
+where post_no = #{post_no}
+</select>      
+      
+<!-- 글수정  -->      
+<update id = "tipupdate" parameterType="com.pickmepetme.domain.ComunityVO">
+      UPDATE TIP_COMUNITY SET post_title = #{post_title}, post_contact = #{post_contact} WHERE post_no = #{post_no}
+</update>
+
+<!-- 글삭제 -->
+<delete id = "tipdelete" parameterType="int">
+delete from TIP_COMUNITY
+where post_no = #{post_no}
+
+</delete>
+
+<!-- SQL hit 컬럼 추가  -->
+<!-- 게시판 조회+1  -->
+<update id="tipcomunityHit" parameterType="int">
+   UPDATE TIP_comunity set
+   hit = hit+1
+   where post_no = #{post_no}
+</update>
+
+<!-- 이미지 등록 -->
+<insert id="tipregister">
+ insert into tip_comunity (post_no, user_id, post_title, post_contact, post_date, hit,
+       gdsImg, gdsThumbImg)
+     values (#{post_no}, #{user_id}, #{post_title}, #{post_contact}, #{post_date}, #{hit},
+        #{gdsImg}, #{gdsThumbImg})
+</insert>
+
+<!-- 글 삽입 -->
+<insert id="tipinsertBoard">
+insert into tip_comunity(user_id, post_title, post_contact, post_date ,gdsImg, gdsThumbImg)
+values(#{user_id} , #{post_title}, #{post_contact}, NOW(), #{gdsImg}, #{gdsThumbImg})
+</insert>
+
 
 
 </mapper>

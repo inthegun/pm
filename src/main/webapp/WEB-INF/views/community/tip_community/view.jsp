@@ -22,11 +22,11 @@
       
       <br><br><br>
       <input type = "button" value = "수정" class = "btn btn-success" 
-      onclick="location.href='/community/free_community/update?post_no=${view.post_no}'"/>
+      onclick="location.href='/community/tip_community/update?post_no=${view.post_no}'"/>
       
 
       <input type="button" value = "삭제" id = "del"class="btn btn-danger" 
-      onclick="location.href='/community/free_community/delete?post_no=${view.post_no}'"/>
+      onclick="location.href='/community/tip_community/delete?post_no=${view.post_no}'"/>
       <script>
       $("#del").click(function(){
        alert("삭제되었습니다.")

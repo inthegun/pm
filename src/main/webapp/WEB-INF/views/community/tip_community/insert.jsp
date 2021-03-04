@@ -12,14 +12,14 @@
 <script
    src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
    
-    <form action='<c:url value='/community/free_community/insert'/>' method="post" enctype="multipart/form-data">
+    <form action='<c:url value='/community/tip_community/insert'/>' method="post" enctype="multipart/form-data">
         <div class="form-group">
               <label for="exampleFormControlInput1">제목</label>
             <input type="text" class="form-control" id="post_title" name="post_title" placeholder="제목을 작성해주세요.">
           </div>
         <div class="form-group">
             <label for="exampleFormControlInput1">작성자</label>
-            <input type="text" class="form-control" id="user_id" name="user_id" value="${user_id}"} readonly="readonly">
+            <input type="text" class="form-control" id="user_id" name="user_id" value="${user_id}" readonly="readonly">
           </div>
           <div class="form-group">
             <label for="exampleFormControlTextarea1">내용</label>
