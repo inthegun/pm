@@ -1,5 +1,7 @@
 package com.pickmepetme.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.pickmepetme.domain.ComunityVO;
 import com.pickmepetme.domain.UserVO;
 import com.pickmepetme.service.UserService;
 
@@ -112,6 +115,25 @@ public class UserController {
 			// 정보를 model에 저장후 페이지 이동
 			model.addAttribute("UserInfo", userVO);
 			return "member/info";
+		}
+		
+		
+		// 내가 쓴글
+		@RequestMapping(value="/mywrite",method=RequestMethod.GET)
+		public void mywrite(ComunityVO comunityvo , Model model,HttpServletRequest req) {
+			logger.info("내가 쓴글 조회");
+			
+			HttpSession sess=req.getSession();
+			
+			ArrayList<ComunityVO> list =userService.mywrite(comunityvo,sess);
+			
+			System.out.println("list : "+ list.size() );
+			
+			
+			model.addAttribute("mywrite", list);
+			
+			
+			
 		}
 		
 		// 회원 정보 수정

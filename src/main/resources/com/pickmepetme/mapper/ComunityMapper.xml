@@ -119,6 +119,14 @@ values(#{user_id} , #{post_title}, #{post_contact}, NOW(), #{gdsImg}, #{gdsThumb
    limit #{pageStart}, #{amount}
 </select>
 
+<!--  베스트 팁 게시판 정렬 리스트  -->
+<select id="besttipgetList" resultType="com.pickmepetme.domain.ComunityVO">
+   select *
+   from tip_comunity
+   order by hit desc limit 5;
+
+</select>
+
 <!-- 총 게시글의 수  -->
 <select id = "tipgetTotalCount" resultType="int">
    select count(*) from tip_comunity

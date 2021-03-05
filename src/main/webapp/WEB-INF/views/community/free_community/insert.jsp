@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" %>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<!DOCTYPE html>
+<html>
+<head> 
 
-<%@include file="../../includes/header.jsp" %>
 <link
    href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
    rel="stylesheet" id="bootstrap-css">
@@ -12,10 +14,45 @@
 <script
    src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
    
-    <form action='<c:url value='/community/free_community/insert'/>' method="post" enctype="multipart/form-data">
+  
+<%@include file="../../includes/header.jsp" %>
+<meta charset="UTF-8">
+<title>insert here</title>
+
+   <!-- 게시글 제목없으면 작성안되게 유효성검사 -->
+<script language="javascript">
+	function validate() {
+		
+		var title = document.getElementById("post_title");
+		
+		
+		if (title.value == "") { //제목를 기입하지 않은 경우
+			alert("제목을 입력해 주세요");
+			title.focus();
+			title.value = "";
+			return false;
+		}
+	}
+	function check(re, what, message) {
+		if (re.test(what.value)) {
+			return true;
+		}
+		alert(message);
+		what.value = "";
+		what.focus();
+		//return false;
+	}
+</script>
+
+</head>
+
+<body>
+   
+    <form action='<c:url value='/community/free_community/insert'/>' method="post" onsubmit = "return validate();" enctype="multipart/form-data">
         <div class="form-group">
               <label for="exampleFormControlInput1">제목</label>
             <input type="text" class="form-control" id="post_title" name="post_title" placeholder="제목을 작성해주세요.">
+            
           </div>
         <div class="form-group">
             <label for="exampleFormControlInput1">작성자</label>
@@ -55,3 +92,5 @@
         
 
 <%@include file="../../includes/footer.jsp"%>
+</body>
+</html>

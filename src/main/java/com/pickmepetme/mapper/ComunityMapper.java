@@ -29,7 +29,7 @@ public interface ComunityMapper {
 	
 	/* 팁 게시판 인터페이스  */
 	
-	//프리커뮤니티 전체목록 조회
+	//팁커뮤니티 전체목록 조회
 		public List<ComunityVO> tipgetList(Criteria cri);
 
 		// 전체 글 수
@@ -49,5 +49,9 @@ public interface ComunityMapper {
 		
 		//글삽입
 		public void tipinsertBoard(ComunityVO comunityvo);
+		
+		
+		/* 베스트팁 게시판 */
+		public List<ComunityVO> besttipgetList(Criteria cri);
 }
 

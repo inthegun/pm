@@ -5,6 +5,7 @@ import java.util.Date;
 public class ComunityVO {
    private Long post_no;
    private String user_id;
+   private String comunity_id;
    private String post_title;
    private String post_contact;
    private Date post_date;
@@ -62,6 +63,12 @@ public class ComunityVO {
    public void setGdsThumbImg(String gdsThumbImg) {
       this.gdsThumbImg = gdsThumbImg;
    }
+public String getComunity_id() {
+	return comunity_id;
+}
+public void setComunity_id(String comunity_id) {
+	this.comunity_id = comunity_id;
+}
    
    
    

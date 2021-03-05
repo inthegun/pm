@@ -5,9 +5,10 @@ import java.util.Date;
 public class CommentVO {
 	private int comment_no;
 	private String user_id;
-	private int post_id;
+	private int post_no;
 	private String comment_contact;
 	private Date comment_date;
+	
 	public int getComment_no() {
 		return comment_no;
 	}
@@ -20,11 +21,11 @@ public class CommentVO {
 	public void setUser_id(String user_id) {
 		this.user_id = user_id;
 	}
-	public int getPost_id() {
-		return post_id;
+	public int getPost_no() {
+		return post_no;
 	}
-	public void setPost_id(int post_id) {
-		this.post_id = post_id;
+	public void setPost_no(int post_no) {
+		this.post_no = post_no;
 	}
 	public String getComment_contact() {
 		return comment_contact;
@@ -38,7 +39,6 @@ public class CommentVO {
 	public void setComment_date(Date comment_date) {
 		this.comment_date = comment_date;
 	}
-	
 	
 	
 }

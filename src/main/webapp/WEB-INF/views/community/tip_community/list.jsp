@@ -108,7 +108,7 @@
                         <br>
                         <!-- 4.검색 -->
                         <form name="searchForm" role="searchForm"
-         onsubmit="return searchcheck();" action="/community/free_community/list" method="get">
+         onsubmit="return searchcheck();" action="/community/tip_community/list" method="get">
                         <select name ="type">
                            <option value=""<c:out value = "${pageMaker.cri.type == null?'selected':''}"/>>분류</option>
                            <option value ="T" <c:out value = "${pageMaker.cri.type eq 'T'?'selected':''}"/>>제목</option>

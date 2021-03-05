@@ -14,4 +14,6 @@ public interface InquiryMapper {
 	
 	// 1대1 문의 보기 
 	public InquiryVO pageview(int no,String userid);
+	
+	 
 }

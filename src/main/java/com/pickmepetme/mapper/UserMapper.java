@@ -1,5 +1,8 @@
 package com.pickmepetme.mapper;
 
+import java.util.ArrayList;
+
+import com.pickmepetme.domain.ComunityVO;
 import com.pickmepetme.domain.UserVO;
 
 /*UserMapper interface로 아래의 메서드를 UserMapper.xml로 이동하여 처리합니다*/
@@ -12,4 +15,7 @@ public interface UserMapper {
  
 	// 회원 정보 조회
 	public UserVO readMember(String id);
+	
+	// 내가 쓴글 보기
+	public ArrayList<ComunityVO> mywrite(ComunityVO comunityvo);
 }

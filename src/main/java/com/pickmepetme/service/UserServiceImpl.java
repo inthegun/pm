@@ -1,10 +1,15 @@
 package com.pickmepetme.service;
 
+import java.util.ArrayList;
+
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.pickmepetme.domain.ComunityVO;
 import com.pickmepetme.domain.UserVO;
 import com.pickmepetme.mapper.UserMapper;
 
@@ -15,6 +20,7 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private UserMapper userMapper;
+	
 	
 	// 회원가입
 	@Override
@@ -47,6 +53,18 @@ public class UserServiceImpl implements UserService {
 		}
 		
 		return userVO;
+	}
+
+
+	@Override
+	public ArrayList<ComunityVO> mywrite(ComunityVO comunityvo,HttpSession session) {
+		// TODO Auto-generated method stub
+		logger.info("내가 쓴글 보기 서비스impl");
+		
+		comunityvo.setUser_id((String)session.getAttribute("userId"));
+		
+		return userMapper.mywrite(comunityvo);
+		
 	}
 	
 	

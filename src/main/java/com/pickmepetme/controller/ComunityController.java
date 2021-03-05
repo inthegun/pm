@@ -95,6 +95,8 @@ public class ComunityController {
      	 logger.info("!!!!!"+File.separator);
      	 logger.info("!!!!!"+imgUploadPath);
      	 
+     	 logger.info("file:"+ file);
+     	 
      	 if(file != null) {
      	  fileName =  UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
      	  logger.info("11111");
@@ -150,14 +152,31 @@ public class ComunityController {
       
       /* -------------------------팁 게시판 컨트롤러 --------------------------------*/
    // 게시글 리스트
-      @RequestMapping(value="/tip_community/list",method=RequestMethod.GET)
-      public void tip_list(Criteria cri, Model model) {
-         logger.info("ComunityController tip_list... : " + cri);
-         model.addAttribute("tip_list", comunityService.tipgetList(cri));
-         
-         int total = comunityService.tipgetTotalCount(cri);
-         
-         model.addAttribute("pageMaker", new PageVO(cri,total));
+      @RequestMapping(value= {"/tip_community/list","/besttip_community/list"},method=RequestMethod.GET)
+      public String tip_list(Criteria cri, Model model, HttpServletRequest req) {
+    	  
+    	  if(req.getServletPath().equals("/community/tip_community/list")) {
+    		  logger.info("ComunityController tip_list... : " + cri);
+    	         model.addAttribute("tip_list", comunityService.tipgetList(cri));
+    	         
+    	         int total = comunityService.tipgetTotalCount(cri);
+    	         model.addAttribute("pageMaker", new PageVO(cri,total));
+    	         
+    	         return "/community/tip_community/list";
+    	         
+    	  }
+			
+			else {
+			  	logger.info("베스트팁 리스트 호출됨");
+			  	
+			  	 model.addAttribute("tip_list", comunityService.besttipgetList(cri));
+			  	
+			  	
+			  	return "/community/besttip_community/list";
+			  	
+			}
+			
+		
          
          
       }

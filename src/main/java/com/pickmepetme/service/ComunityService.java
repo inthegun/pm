@@ -53,6 +53,11 @@ public interface ComunityService {
 		
 		//글삽입
 		public void tipinsertBoard(ComunityVO comunityvo);
+		
+		
+		/* 베스트팁 게시판 */
+		public List<ComunityVO> besttipgetList(Criteria cri);
+		
 	
 	
 	

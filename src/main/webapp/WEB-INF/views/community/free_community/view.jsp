@@ -21,12 +21,16 @@
       
       
       <br><br><br>
+      
+      <c:if test="${sessionScope.userId eq view.user_id }">
       <input type = "button" value = "수정" class = "btn btn-success" 
       onclick="location.href='/community/free_community/update?post_no=${view.post_no}'"/>
       
 
       <input type="button" value = "삭제" id = "del"class="btn btn-danger" 
       onclick="location.href='/community/free_community/delete?post_no=${view.post_no}'"/>
+      
+      </c:if>
       <script>
       $("#del").click(function(){
        alert("삭제되었습니다.")
@@ -35,4 +39,5 @@
       
 </body>
 </html>
+<%@include file="../../comment/comment.jsp" %>
 <%@include file="../../includes/footer.jsp"%>

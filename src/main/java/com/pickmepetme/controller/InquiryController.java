@@ -56,13 +56,7 @@ public class InquiryController {
 			return "inquiry/inquirylist";
 		}
 		
-		// 1대1 문의 보기 
-		@RequestMapping(value="inquiry_view")
-		public String inquiryview(@RequestParam("inquiry_no")int inquiry_no,Model model) throws Exception{
-			logger.info("1대1 문의 보기 호출됨");
-			
-			return "";
-		}
+	
 		
 		
 		// 1대1 문의 작성 폼

@@ -1,12 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
-<%@include file="../../includes/header.jsp" %>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="UTF-8">
+
 <link
    href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
    rel="stylesheet" id="bootstrap-css">
@@ -14,13 +12,27 @@
    src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script
    src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+   
+<head>   
+<%@include file="../../includes/header.jsp" %>
 <meta charset="UTF-8">
-
-
-   </script>
+<title>list here</title>
 </head>
 
 <body>
+
+<script language="javascript">
+function searchcheck() {
+      alert("앙");
+      
+      var searchForm = $("#searchForm");
+      alert(searchForm);
+      if(!searchForm.find("option:selected").val()){
+         alert("검색종류 선택");
+         return false;
+      }
+}
+   </script>
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
@@ -139,8 +151,15 @@
 
             
             <!-- End of Main Content -->
-</body>
- 
-
+            
 <%@include file="../../includes/footer.jsp"%>
+</body>
 </html>
+
+
+
+
+
+
+
+

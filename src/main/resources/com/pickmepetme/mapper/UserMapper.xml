@@ -33,5 +33,15 @@ values(#{user_id}, #{user_passwd}, #{user_name}, #{user_birth}, #{user_addr}, #{
 	select * from user where user_id=#{user_id}
 </select>
 
+<!-- 내가 쓴글 보기 -->
+<select id="mywrite" resultType="com.pickmepetme.domain.ComunityVO">
+select * from (
+	select * from comunity c
+	union all 
+	select * from tip_comunity t
+) ta where ta.user_id = #{user_id}
+
+</select>
+
 </mapper>
 

@@ -6,6 +6,6 @@
 
 <%@include file="includes/header.jsp" %>
 
-<img src='<s:url value="/resources/img/MainP.jpg"/>' style="width:100%; hegith:auto;">
+<img src='<s:url value="/resources/img/unknown.png"/>' style="width:100%; hegith:auto;">
 
 <%@include file="includes/footer.jsp"%>

@@ -111,6 +111,12 @@ public class ComunityServiceImpl implements ComunityService{
 		comunityMapper.tipinsertBoard(comunityvo);
 	}
 
+	// 베스트팁 정렬
+	@Override
+	public List<ComunityVO> besttipgetList(Criteria cri) {
+		return comunityMapper.besttipgetList(cri);
+	}
+
       
 
 }

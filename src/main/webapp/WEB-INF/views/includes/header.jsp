@@ -114,7 +114,6 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">community:</h6>
                         <a class="collapse-item" href="/community/free_community/list">자유</a>
-                        <a class="collapse-item" href="/community/best_community/list">추천</a>
                         <a class="collapse-item" href="/community/tip_community/list">TIP</a>
                         <a class="collapse-item" href="/community/besttip_community/list">베스트팁</a>
                     </div>
@@ -133,10 +132,10 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">MyPage:</h6>
-                        <a class="collapse-item" href="utilities-color.html">내가 쓴 글</a>
-                        <a class="collapse-item" href="utilities-border.html">반려동물 정보</a>
-                        <a class="collapse-item" href="../../member/info">회원 정보</a>
-                        <a class="collapse-item" href="utilities-other.html">최근 거래 내역</a>
+                        <a class="collapse-item" href="/member/mywrite">내가 쓴 글</a>
+                        <a class="collapse-item" href="/member/">반려동물 정보</a>
+                        <a class="collapse-item" href="/member/info">회원 정보</a>
+                        <a class="collapse-item" href="/member/">최근 거래 내역</a>
                     </div>
                 </div>
             </li>
@@ -150,7 +149,7 @@
             </div> -->
 
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive"
                     aria-expanded="true" aria-controls="collapseFive">
                     <i class="fas fa-fw fa-star"></i>
@@ -162,13 +161,13 @@
                         <a class="collapse-item" href="login.html">랭킹순</a>
                         <a class="collapse-item" href="register.html">평점순</a>
                        
-                        <!-- <div class="collapse-divider"></div>
+                        <div class="collapse-divider"></div>
                         <h6 class="collapse-header">Other Pages:</h6>
                         <a class="collapse-item" href="404.html">404 Page</a>
-                        <a class="collapse-item" href="blank.html">Blank Page</a> -->
+                        <a class="collapse-item" href="blank.html">Blank Page</a>
                     </div>
                 </div>
-            </li>
+            </li> -->
 
             <!-- Nav Item - Charts -->
             <!-- 고객센터 -->
@@ -189,11 +188,11 @@
             </li>
 
             <!-- Nav Item - Tables -->
-            <li class="nav-item active">
+            <!-- <li class="nav-item active">
                 <a class="nav-link" href="tables.html">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Tables</span></a>
-            </li>
+            </li> -->
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
