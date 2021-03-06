@@ -8,6 +8,7 @@ public class ComunityVO {
    private String comunity_id;
    private String post_title;
    private String post_contact;
+   private int price;
    private Date post_date;
    private int hit;
    private String gdsImg;
@@ -38,6 +39,12 @@ public class ComunityVO {
    }
    public void setPost_contact(String post_contact) {
       this.post_contact = post_contact;
+   }
+   public int getPrice() {
+		return price;
+   }
+   public void setPrice(int price) {
+	   this.price = price;
    }
    public Date getPost_date() {
       return post_date;

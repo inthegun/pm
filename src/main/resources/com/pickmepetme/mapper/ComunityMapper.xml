@@ -49,6 +49,7 @@
 <select id = "pageview" resultType="com.pickmepetme.domain.ComunityVO">
 select
 user_id,
+comunity_id,
 post_no,
 post_title,
 post_contact,
@@ -150,6 +151,7 @@ values(#{user_id} , #{post_title}, #{post_contact}, NOW(), #{gdsImg}, #{gdsThumb
 <select id = "tippageview" resultType="com.pickmepetme.domain.ComunityVO">
 select
 user_id,
+comunity_id,
 post_no,
 post_title,
 post_contact,
@@ -192,6 +194,280 @@ where post_no = #{post_no}
 <insert id="tipinsertBoard">
 insert into tip_comunity(user_id, post_title, post_contact, post_date ,gdsImg, gdsThumbImg)
 values(#{user_id} , #{post_title}, #{post_contact}, NOW(), #{gdsImg}, #{gdsThumbImg})
+</insert>
+
+<!-- 돌봄 헬퍼게시판 -->
+<!--  돌봄 게시판 관련 SQL  -->
+
+<!-- list 목록 -->
+<select id="caregetList" resultType="com.pickmepetme.domain.ComunityVO">
+   select *
+   from care_comunity
+   <trim prefix="WHERE" prefixOverrides="AND|OR">
+         <if test='type=="T"'>
+            AND POST_TITLE like CONCAT('%', #{keyword}, '%')
+         </if>
+         <if test='type=="C"'>
+            AND POST_CONTACT like CONCAT('%', #{keyword}, '%')
+         </if>
+         <if test='type=="W"'>
+            AND user_id like CONCAT('%', #{keyword}, '%')
+         </if>   
+      </trim>
+   order by post_no desc
+   limit #{pageStart}, #{amount}
+</select>
+
+<!-- 총 게시글의 수  -->
+<select id = "caregetTotalCount" resultType="int">
+   select count(*) from care_comunity
+   <trim prefix="WHERE" prefixOverrides="AND|OR">
+<if test='keyword != null and keyword != "" '>
+         <if test='type=="T"'>
+            AND POST_TITLE like CONCAT('%', #{keyword}, '%')
+         </if>
+         <if test='type=="C"'>
+            AND POST_CONTACT like CONCAT('%', #{keyword}, '%')
+         </if>
+         <if test='type=="W"'>
+            AND user_id like CONCAT('%', #{keyword}, '%')
+         </if>
+      </if>
+   </trim>
+
+</select>
+
+<!-- 글 상세조회 -->
+<select id = "carepageview" resultType="com.pickmepetme.domain.ComunityVO">
+select
+user_id,
+comunity_id,
+post_no,
+post_title,
+post_contact,
+hit,
+post_date,
+gdsThumbImg,
+gdsImg from care_comunity
+where post_no = #{post_no}
+</select>      
+      
+<!-- 글수정  -->      
+<update id = "careupdate" parameterType="com.pickmepetme.domain.ComunityVO">
+      UPDATE care_COMUNITY SET post_title = #{post_title}, post_contact = #{post_contact} WHERE post_no = #{post_no}
+</update>
+
+<!-- 글삭제 -->
+<delete id = "caredelete" parameterType="int">
+delete from care_COMUNITY
+where post_no = #{post_no}
+
+</delete>
+
+<!-- SQL hit 컬럼 추가  -->
+<!-- 게시판 조회+1  -->
+<update id="carecomunityHit" parameterType="int">
+   UPDATE care_comunity set
+   hit = hit+1
+   where post_no = #{post_no}
+</update>
+
+<!-- 이미지 등록 -->
+<insert id="careregister">
+ insert into care_comunity (post_no, user_id, post_title, post_contact, post_date, hit,
+       gdsImg, gdsThumbImg)
+     values (#{post_no}, #{user_id}, #{post_title}, #{post_contact}, #{post_date}, #{hit},
+        #{gdsImg}, #{gdsThumbImg})
+</insert>
+
+<!-- 글 삽입 -->
+<insert id="careinsertBoard">
+insert into care_comunity(user_id, post_title, post_contact, post_date ,gdsImg, gdsThumbImg)
+values(#{user_id} , #{post_title}, #{post_contact}, NOW(), #{gdsImg}, #{gdsThumbImg})
+</insert>
+
+<!-- 돌봄 시터게시판 -->
+<!--  돌봄 게시판 관련 SQL  -->
+
+<!-- list 목록 -->
+<select id="sittergetList" resultType="com.pickmepetme.domain.ComunityVO">
+   select *
+   from sitter_comunity
+   <trim prefix="WHERE" prefixOverrides="AND|OR">
+         <if test='type=="T"'>
+            AND POST_TITLE like CONCAT('%', #{keyword}, '%')
+         </if>
+         <if test='type=="C"'>
+            AND POST_CONTACT like CONCAT('%', #{keyword}, '%')
+         </if>
+         <if test='type=="W"'>
+            AND user_id like CONCAT('%', #{keyword}, '%')
+         </if>   
+      </trim>
+   order by post_no desc
+   limit #{pageStart}, #{amount}
+</select>
+
+<!-- 총 게시글의 수  -->
+<select id = "sittergetTotalCount" resultType="int">
+   select count(*) from sitter_comunity
+   <trim prefix="WHERE" prefixOverrides="AND|OR">
+<if test='keyword != null and keyword != "" '>
+         <if test='type=="T"'>
+            AND POST_TITLE like CONCAT('%', #{keyword}, '%')
+         </if>
+         <if test='type=="C"'>
+            AND POST_CONTACT like CONCAT('%', #{keyword}, '%')
+         </if>
+         <if test='type=="W"'>
+            AND user_id like CONCAT('%', #{keyword}, '%')
+         </if>
+      </if>
+   </trim>
+
+</select>
+
+<!-- 글 상세조회 -->
+<select id = "sitterpageview" resultType="com.pickmepetme.domain.ComunityVO">
+select
+user_id,
+comunity_id,
+post_no,
+post_title,
+post_contact,
+hit,
+post_date,
+gdsThumbImg,
+gdsImg from sitter_comunity
+where post_no = #{post_no}
+</select>      
+      
+<!-- 글수정  -->      
+<update id = "sitterupdate" parameterType="com.pickmepetme.domain.ComunityVO">
+      UPDATE sitter_COMUNITY SET post_title = #{post_title}, post_contact = #{post_contact} WHERE post_no = #{post_no}
+</update>
+
+<!-- 글삭제 -->
+<delete id = "sitterdelete" parameterType="int">
+delete from sitter_COMUNITY
+where post_no = #{post_no}
+
+</delete>
+
+<!-- SQL hit 컬럼 추가  -->
+<!-- 게시판 조회+1  -->
+<update id="sittercomunityHit" parameterType="int">
+   UPDATE sitter_comunity set
+   hit = hit+1
+   where post_no = #{post_no}
+</update>
+
+<!-- 이미지 등록 -->
+<insert id="sitterregister">
+ insert into sitter_comunity (post_no, user_id, post_title, post_contact, post_date, hit,
+       gdsImg, gdsThumbImg)
+     values (#{post_no}, #{user_id}, #{post_title}, #{post_contact}, #{post_date}, #{hit},
+        #{gdsImg}, #{gdsThumbImg})
+</insert>
+
+<!-- 글 삽입 -->
+<insert id="sitterinsertBoard">
+insert into sitter_comunity(user_id, post_title, post_contact, post_date ,gdsImg, gdsThumbImg)
+values(#{user_id} , #{post_title}, #{post_contact}, NOW(), #{gdsImg}, #{gdsThumbImg})
+</insert>
+
+
+<!-- 분양##########################################################-->
+
+<!-- 분양 게시판 -->
+<!--  분양 게시판 관련 SQL  -->
+
+<!-- list 목록 -->
+<select id="parcelgetList" resultType="com.pickmepetme.domain.ComunityVO">
+   select *
+   from parcel_comunity
+   <trim prefix="WHERE" prefixOverrides="AND|OR">
+         <if test='type=="T"'>
+            AND POST_TITLE like CONCAT('%', #{keyword}, '%')
+         </if>
+         <if test='type=="C"'>
+            AND POST_CONTACT like CONCAT('%', #{keyword}, '%')
+         </if>
+         <if test='type=="W"'>
+            AND user_id like CONCAT('%', #{keyword}, '%')
+         </if>   
+      </trim>
+   order by post_no desc
+   limit #{pageStart}, #{amount}
+</select>
+
+<!-- 총 게시글의 수  -->
+<select id = "parcelgetTotalCount" resultType="int">
+   select count(*) from parcel_comunity
+   <trim prefix="WHERE" prefixOverrides="AND|OR">
+<if test='keyword != null and keyword != "" '>
+         <if test='type=="T"'>
+            AND POST_TITLE like CONCAT('%', #{keyword}, '%')
+         </if>
+         <if test='type=="C"'>
+            AND POST_CONTACT like CONCAT('%', #{keyword}, '%')
+         </if>
+         <if test='type=="W"'>
+            AND user_id like CONCAT('%', #{keyword}, '%')
+         </if>
+      </if>
+   </trim>
+
+</select>
+
+<!-- 글 상세조회 -->
+<select id = "parcelpageview" resultType="com.pickmepetme.domain.ComunityVO">
+select
+user_id,
+comunity_id,
+post_no,
+post_title,
+post_contact,
+price,
+hit,
+post_date,
+gdsThumbImg,
+gdsImg from parcel_comunity
+where post_no = #{post_no}
+</select>      
+      
+<!-- 글수정  -->      
+<update id = "parcelupdate" parameterType="com.pickmepetme.domain.ComunityVO">
+      UPDATE parcel_COMUNITY SET post_title = #{post_title}, post_contact = #{post_contact}, price = #{price} WHERE post_no = #{post_no}
+</update>
+
+<!-- 글삭제 -->
+<delete id = "parceldelete" parameterType="int">
+delete from parcel_COMUNITY
+where post_no = #{post_no}
+
+</delete>
+
+<!-- SQL hit 컬럼 추가  -->
+<!-- 게시판 조회+1  -->
+<update id="parcelcomunityHit" parameterType="int">
+   UPDATE parcel_comunity set
+   hit = hit+1
+   where post_no = #{post_no}
+</update>
+
+<!-- 이미지 등록 -->
+<insert id="parcelregister">
+ insert into parcel_comunity (post_no, user_id, post_title, post_contact, price, post_date, hit,
+       gdsImg, gdsThumbImg)
+     values (#{post_no}, #{user_id}, #{post_title}, #{post_contact}, #{price}, #{post_date}, #{hit},
+        #{gdsImg}, #{gdsThumbImg})
+</insert>
+
+<!-- 글 삽입 -->
+<insert id="parcelinsertBoard">
+insert into parcel_comunity(user_id, post_title, post_contact, price, post_date ,gdsImg, gdsThumbImg)
+values(#{user_id} , #{post_title}, #{post_contact}, #{price}, NOW(), #{gdsImg}, #{gdsThumbImg})
 </insert>
 
 

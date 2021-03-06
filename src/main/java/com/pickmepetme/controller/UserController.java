@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.pickmepetme.domain.ComunityVO;
+import com.pickmepetme.domain.Criteria;
+import com.pickmepetme.domain.PageVO;
 import com.pickmepetme.domain.UserVO;
 import com.pickmepetme.service.UserService;
 
@@ -119,24 +121,56 @@ public class UserController {
 		
 		
 		// 내가 쓴글
-		@RequestMapping(value="/mywrite",method=RequestMethod.GET)
-		public void mywrite(ComunityVO comunityvo , Model model,HttpServletRequest req) {
-			logger.info("내가 쓴글 조회");
-			
-			HttpSession sess=req.getSession();
-			
-			ArrayList<ComunityVO> list =userService.mywrite(comunityvo,sess);
-			
-			System.out.println("list : "+ list.size() );
-			
-			
-			model.addAttribute("mywrite", list);
-			
-			
-			
-		}
+				@RequestMapping(value="/mywrite",method=RequestMethod.GET)
+				public void mywrite(ComunityVO comunityvo , Model model,HttpServletRequest req,Criteria cri) {
+					logger.info("내가 쓴글 조회");
+					
+					HttpSession sess=req.getSession();
+					logger.info("!@#!!@#"+sess.getAttribute("userId"));
+					cri.setUser_id((String) sess.getAttribute("userId"));
+					ArrayList<ComunityVO> list =userService.mywrite(comunityvo,sess,cri);
+					
+					logger.info("list : "+ list.size() );
+					
+					int total = userService.mywriteCount(cri);
+					logger.info("totall=" +  total);
+					
+					model.addAttribute("mywrite", list);
+					model.addAttribute("pageMaker",new PageVO(cri, total));
+					
+					
+					
+				}
 		
 		// 회원 정보 수정
+		@RequestMapping(value= "/memberUpdate",method =RequestMethod.POST)
+		public String Memberupdate(UserVO vo, Model model) throws Exception{
+			
+			userService.memberUpdate(vo);
+			
+			return "redirect:/member/info";			
+		}	
+		
+		// 회원 정보 수정
+		@RequestMapping(value = "/alter" , method = RequestMethod.POST)
+        public String Memberalter() {
+
+
+            return "redirect:/member/alter";
+        }
+		
+		// 회원 정보 수정
+		@RequestMapping(value = "/alter" , method = RequestMethod.GET)
+        public void MemberalterGet(HttpServletRequest req, HttpSession session, Model model) throws Exception {
+
+            session = req.getSession();
+            String id = (String) session.getAttribute("userId");
+            UserVO userVO = userService.readMember(id);
+            model.addAttribute("User",userVO);
+            logger.info("alter Controller get");
+
+
+        }
 		
 		
 		// 회원 정보 삭제(탈퇴)

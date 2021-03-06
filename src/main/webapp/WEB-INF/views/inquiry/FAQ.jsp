@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-    <%@include file="../includes/header.jsp" %>
+
 <!DOCTYPE html>
 <html>
 <head>
+    <%@include file="../includes/header.jsp" %>
 <meta charset="UTF-8">
 <title> 자주 묻는 질문 입니다.</title>
 </head>

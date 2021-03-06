@@ -81,32 +81,25 @@ public class ComunityController {
     	  
       }
       
-      // 글 넣기 처리
+   // 글 넣기 처리
       @RequestMapping(value="free_community/insert",method=RequestMethod.POST)
       public String PostInsert(ComunityVO comunityvo,MultipartFile file,Model model) throws Exception {
     	  logger.info("자유게시판 글 삽입 처리 호출됨");
-    	  
-    	  
+    	  logger.info("file:" + file);  	  
      	 String imgUploadPath = uploadPath + File.separator + "imgUpload";
      	 String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
      	 String fileName = null;
      	 
-     	 logger.info("!!!!!"+uploadPath);
-     	 logger.info("!!!!!"+File.separator);
-     	 logger.info("!!!!!"+imgUploadPath);
-     	 
-     	 logger.info("file:"+ file);
-     	 
-     	 if(file != null) {
+     	 if(file.getOriginalFilename() != "") {
      	  fileName =  UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
-     	  logger.info("11111");
-     	 } else {
-     	  fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
+      	 comunityvo.setGdsImg(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+      	 comunityvo.setGdsThumbImg(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
+     	  
+     	 }else {
+           	 comunityvo.setGdsImg(null);
+           	 comunityvo.setGdsThumbImg(null);
+     		 
      	 }
-
-     	 comunityvo.setGdsImg(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
-     	 comunityvo.setGdsThumbImg(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
-     	 
      	 comunityService.insertBoard(comunityvo);
      	
     	  return "redirect:/community/free_community/list";
@@ -200,26 +193,21 @@ public class ComunityController {
       @RequestMapping(value="tip_community/insert",method=RequestMethod.POST)
       public String tipPostInsert(ComunityVO comunityvo,MultipartFile file,Model model) throws Exception {
     	  logger.info("팁게시판 글 삽입 처리 호출됨");
-    	  
-    	  
+    	  logger.info("file:" + file);  	  
      	 String imgUploadPath = uploadPath + File.separator + "imgUpload";
      	 String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
      	 String fileName = null;
      	 
-     	 logger.info("!!!!!"+uploadPath);
-     	 logger.info("!!!!!"+File.separator);
-     	 logger.info("!!!!!"+imgUploadPath);
-     	 
-     	 if(file != null) {
+     	 if(file.getOriginalFilename() != "") {
      	  fileName =  UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
-     	  logger.info("11111");
-     	 } else {
-     	  fileName = uploadPath + File.separator + "images" + File.separator + "none.png";
+      	 comunityvo.setGdsImg(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+      	 comunityvo.setGdsThumbImg(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
+     	  
+     	 }else {
+           	 comunityvo.setGdsImg(null);
+           	 comunityvo.setGdsThumbImg(null);
+     		 
      	 }
-
-     	 comunityvo.setGdsImg(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
-     	 comunityvo.setGdsThumbImg(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
-     	 
      	 comunityService.tipinsertBoard(comunityvo);
      	
     	  return "redirect:/community/tip_community/list";
@@ -263,7 +251,278 @@ public String tipgetDelete(@RequestParam("post_no") int post_no)throws Exception
    return "redirect:/community/tip_community/list";
 }
       
-      
+/* -------------------------돌봄 헬퍼게시판 컨트롤러 --------------------------------*/
+//게시글 리스트
+@RequestMapping(value="/care_community/list",method=RequestMethod.GET)
+public void care_list(Criteria cri, Model model) {
+   logger.info("ComunityController care_list... : " + cri);
+   model.addAttribute("care_list", comunityService.caregetList(cri));
+   
+   int total = comunityService.caregetTotalCount(cri);
+   
+   model.addAttribute("pageMaker", new PageVO(cri,total));
+   
+   
+}
+
+//글 넣기 폼 
+@RequestMapping(value="care_community/insert",method=RequestMethod.GET)
+public void care_insert(ComunityVO comunityvo,Model model,HttpSession session) {
+	  logger.info("팁 게시판 글 삽입 폼 호출됨");
+	  
+	  String id = (String) session.getAttribute("userId");
+	  UserVO uservo = userservice.readMember(id);
+	  
+	  model.addAttribute("user_id", uservo.getUser_id());
+	  model.addAttribute("comunityvo", new ComunityVO());
+	  
+	  
+	  
+}
+
+// 글 넣기 처리
+@RequestMapping(value="care_community/insert",method=RequestMethod.POST)
+public String carePostInsert(ComunityVO comunityvo,MultipartFile file,Model model) throws Exception {
+	  logger.info("돌봄게시판 글 삽입 처리 호출됨");
+	  logger.info("file:" + file);  	  
+	 String imgUploadPath = uploadPath + File.separator + "imgUpload";
+	 String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+	 String fileName = null;
+	 
+	 if(file.getOriginalFilename() != "") {
+	  fileName =  UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
+	 comunityvo.setGdsImg(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+	 comunityvo.setGdsThumbImg(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
+	  
+	 }else {
+     	 comunityvo.setGdsImg(null);
+     	 comunityvo.setGdsThumbImg(null);
+		 
+	 }
+	 comunityService.careinsertBoard(comunityvo);
+	
+	  return "redirect:/community/care_community/list";
+}
+//게시글 상세보기
+@RequestMapping(value = "/care_community/view", method = RequestMethod.GET)
+public String caregetPageview(@RequestParam("post_no") int post_no, Model model) throws Exception {
+   ComunityVO view = null;
+   view =  comunityService.carepageview(post_no);
+   model.addAttribute("view", view);
+   
+   /* 조회수 +1 */
+   comunityService.carecomunityHit(post_no);
+   
+   return "community/care_community/view";
+}
+
+//수정 폼
+@RequestMapping(value = "/care_community/update", method = RequestMethod.GET)
+public void caregetUpdate(@RequestParam("post_no") int post_no, Model model) throws Exception{
+   
+   ComunityVO vo = comunityService.carepageview(post_no);
+   
+   model.addAttribute("view", vo);
+   
+   
+}
+
+//수정처리
+@RequestMapping(value = "/care_community/update", method = RequestMethod.POST)
+public String carepostUpdate(ComunityVO vo, HttpServletRequest hsq) throws Exception{
+comunityService.careupdate(vo);
+return "redirect:/community/care_community/view?post_no=" + vo.getPost_no();
+}   
+
+//게시글삭제
+@RequestMapping(value="/care_community/delete", method = RequestMethod.GET)
+public String caregetDelete(@RequestParam("post_no") int post_no)throws Exception{
+comunityService.caredelete(post_no);
+return "redirect:/community/care_community/list";
+}
+   
+
+/* -------------------------돌봄 시터게시판 컨트롤러 --------------------------------*/
+//게시글 리스트
+@RequestMapping(value="/sitter_community/list",method=RequestMethod.GET)
+public void sitter_list(Criteria cri, Model model) {
+logger.info("ComunityController sitter_list... : " + cri);
+model.addAttribute("sitter_list", comunityService.sittergetList(cri));
+
+int total = comunityService.sittergetTotalCount(cri);
+
+model.addAttribute("pageMaker", new PageVO(cri,total));
+
+
+}
+
+//글 넣기 폼 
+@RequestMapping(value="sitter_community/insert",method=RequestMethod.GET)
+public void sitter_insert(ComunityVO comunityvo,Model model,HttpSession session) {
+	  logger.info("팁 게시판 글 삽입 폼 호출됨");
+	  
+	  String id = (String) session.getAttribute("userId");
+	  UserVO uservo = userservice.readMember(id);
+	  
+	  model.addAttribute("user_id", uservo.getUser_id());
+	  model.addAttribute("comunityvo", new ComunityVO());
+	  
+	  
+	  
+}
+
+// 글 넣기 처리
+@RequestMapping(value="sitter_community/insert",method=RequestMethod.POST)
+public String sitterPostInsert(ComunityVO comunityvo,MultipartFile file,Model model) throws Exception {
+	  logger.info("팁게시판 글 삽입 처리 호출됨");
+	  logger.info("file:" + file);  	  
+	 String imgUploadPath = uploadPath + File.separator + "imgUpload";
+	 String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+	 String fileName = null;
+	 
+	 if(file.getOriginalFilename() != "") {
+	  fileName =  UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
+	 comunityvo.setGdsImg(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+	 comunityvo.setGdsThumbImg(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
+	  
+	 }else {
+     	 comunityvo.setGdsImg(null);
+     	 comunityvo.setGdsThumbImg(null);
+		 
+	 }
+	 comunityService.sitterinsertBoard(comunityvo);
+	
+	  return "redirect:/community/sitter_community/list";
+}
+
+//게시글 상세보기
+@RequestMapping(value = "/sitter_community/view", method = RequestMethod.GET)
+public String sittergetPageview(@RequestParam("post_no") int post_no, Model model) throws Exception {
+ComunityVO view = null;
+view =  comunityService.sitterpageview(post_no);
+model.addAttribute("view", view);
+
+/* 조회수 +1 */
+comunityService.sittercomunityHit(post_no);
+
+return "community/sitter_community/view";
+}
+
+//수정 폼
+@RequestMapping(value = "/sitter_community/update", method = RequestMethod.GET)
+public void sittergetUpdate(@RequestParam("post_no") int post_no, Model model) throws Exception{
+
+ComunityVO vo = comunityService.sitterpageview(post_no);
+
+model.addAttribute("view", vo);
+
+
+}
+
+//수정처리
+@RequestMapping(value = "/sitter_community/update", method = RequestMethod.POST)
+public String sitterpostUpdate(ComunityVO vo, HttpServletRequest hsq) throws Exception{
+comunityService.sitterupdate(vo);
+return "redirect:/community/sitter_community/view?post_no=" + vo.getPost_no();
+}   
+
+//게시글삭제
+@RequestMapping(value="/sitter_community/delete", method = RequestMethod.GET)
+public String sittergetDelete(@RequestParam("post_no") int post_no)throws Exception{
+comunityService.sitterdelete(post_no);
+return "redirect:/community/sitter_community/list";
+}  
+
+/* -------------------------분양게시판 컨트롤러 --------------------------------*/
+//게시글 리스트
+@RequestMapping(value="/parcel_community/list",method=RequestMethod.GET)
+public void parcel_list(Criteria cri, Model model) {
+logger.info("ComunityController parcel_list... : " + cri);
+model.addAttribute("parcel_list", comunityService.parcelgetList(cri));
+
+int total = comunityService.parcelgetTotalCount(cri);
+
+model.addAttribute("pageMaker", new PageVO(cri,total));
+
+
+}
+
+//글 넣기 폼 
+@RequestMapping(value="parcel_community/insert",method=RequestMethod.GET)
+public void parcel_insert(ComunityVO comunityvo,Model model,HttpSession session) {
+	  logger.info("팁 게시판 글 삽입 폼 호출됨");
+	  
+	  String id = (String) session.getAttribute("userId");
+	  UserVO uservo = userservice.readMember(id);
+	  
+	  model.addAttribute("user_id", uservo.getUser_id());
+	  model.addAttribute("comunityvo", new ComunityVO());
+	  
+	  
+	  
+}
+
+//글 넣기 처리
+@RequestMapping(value="parcel_community/insert",method=RequestMethod.POST)
+public String parcelPostInsert(ComunityVO comunityvo,MultipartFile file,Model model) throws Exception {
+	  logger.info("팁게시판 글 삽입 처리 호출됨");
+	  logger.info("file:" + file);  	  
+	 String imgUploadPath = uploadPath + File.separator + "imgUpload";
+	 String ymdPath = UploadFileUtils.calcPath(imgUploadPath);
+	 String fileName = null;
+	 
+	 if(file.getOriginalFilename() != "") {
+	  fileName =  UploadFileUtils.fileUpload(imgUploadPath, file.getOriginalFilename(), file.getBytes(), ymdPath);
+	 comunityvo.setGdsImg(File.separator + "imgUpload" + ymdPath + File.separator + fileName);
+	 comunityvo.setGdsThumbImg(File.separator + "imgUpload" + ymdPath + File.separator + "s" + File.separator + "s_" + fileName);
+	  
+	 }else {
+ 	 comunityvo.setGdsImg(null);
+ 	 comunityvo.setGdsThumbImg(null);
+		 
+	 }
+	 comunityService.parcelinsertBoard(comunityvo);
+	
+	  return "redirect:/community/parcel_community/list";
+}
+
+//게시글 상세보기
+@RequestMapping(value = "/parcel_community/view", method = RequestMethod.GET)
+public String parcelgetPageview(@RequestParam("post_no") int post_no, Model model) throws Exception {
+ComunityVO view = null;
+view =  comunityService.parcelpageview(post_no);
+model.addAttribute("view", view);
+
+/* 조회수 +1 */
+comunityService.parcelcomunityHit(post_no);
+
+return "community/parcel_community/view";
+}
+
+//수정 폼
+@RequestMapping(value = "/parcel_community/update", method = RequestMethod.GET)
+public void parcelgetUpdate(@RequestParam("post_no") int post_no, Model model) throws Exception{
+
+ComunityVO vo = comunityService.parcelpageview(post_no);
+
+model.addAttribute("view", vo);
+
+
+}
+
+//수정처리
+@RequestMapping(value = "/parcel_community/update", method = RequestMethod.POST)
+public String parcelpostUpdate(ComunityVO vo, HttpServletRequest hsq) throws Exception{
+comunityService.parcelupdate(vo);
+return "redirect:/community/parcel_community/view?post_no=" + vo.getPost_no();
+}   
+
+//게시글삭제
+@RequestMapping(value="/parcel_community/delete", method = RequestMethod.GET)
+public String parcelgetDelete(@RequestParam("post_no") int post_no)throws Exception{
+comunityService.parceldelete(post_no);
+return "redirect:/community/parcel_community/list";
+}  
       
    
 

@@ -9,15 +9,15 @@
 
 <!-- 댓글추가 -->
 <insert id="addComment">
-insert into comment(user_id, post_no, comment_contact, comment_date)
-values (#{user_id}, #{post_no}, #{comment_contact} , NOW())
+insert into comment(user_id, post_no,comunity_id, comment_contact, comment_date)
+values (#{user_id}, #{post_no},#{comunity_id}, #{comment_contact} , NOW())
 </insert>
 
 <!-- 댓글리스트 -->
 <select id="commentList" resultType="com.pickmepetme.domain.CommentVO">
 select * 
 from comment
-where post_no = #{post_no}
+where post_no = #{post_no} and comunity_id = #{comunity_id}
 order by commnet_no desc
 </select>
 

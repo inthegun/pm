@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
-<%@include file="../includes/header.jsp" %>
+
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<%@include file="../includes/header.jsp" %>
 <script type="text/javascript"> 
 <%-- 참고한 블로그 https://gbsb.tistory.com/99 --%>
 $(document).ready(function(){
@@ -139,6 +141,7 @@ body {
     
     <c:if test="${member != null}"> <%-- 로그인 되어있을경우 --%>
     잘못된 접근입니다.
+    <img src='<s:url value="http://image.dongascience.com/Photo/2020/03/5bddba7b6574b95d37b6079c199d7101.jpg"/>' style="width:30%; hegith:auto;">
     </c:if>
     
     

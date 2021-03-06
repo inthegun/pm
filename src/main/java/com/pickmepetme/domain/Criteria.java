@@ -3,6 +3,7 @@ package com.pickmepetme.domain;
 public class Criteria {
 	private int pageNum;
 	private int amount;
+	private String user_id;
 	
 	private String keyword;
 	private String type;
@@ -51,6 +52,15 @@ public class Criteria {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+	
+
+	public String getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
 	}
 
 	@Override

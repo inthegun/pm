@@ -116,6 +116,117 @@ public class ComunityServiceImpl implements ComunityService{
 	public List<ComunityVO> besttipgetList(Criteria cri) {
 		return comunityMapper.besttipgetList(cri);
 	}
+	
+	/* 돌봄 헬퍼게시판 구현 */
+
+	@Override
+	public List<ComunityVO> caregetList(Criteria cri) {
+		return comunityMapper.caregetList(cri);
+	}
+
+	@Override
+	public int caregetTotalCount(Criteria cri) {
+		 return comunityMapper.caregetTotalCount(cri);
+	}
+
+	@Override
+	public void careupdate(ComunityVO vo) throws Exception {
+		comunityMapper.careupdate(vo);
+	}
+
+	@Override
+	public ComunityVO carepageview(int post_no) {
+		return comunityMapper.carepageview(post_no);
+	}
+
+	@Override
+	public void caredelete(int post_no) throws Exception {
+		 comunityMapper.caredelete(post_no);
+	}
+
+	@Override
+	public boolean carecomunityHit(int post_no) throws Exception {
+		return comunityMapper.carecomunityHit(post_no);
+	}
+
+	@Override
+	public void careinsertBoard(ComunityVO comunityvo) {
+		comunityMapper.careinsertBoard(comunityvo);
+	}
+	
+	/* 돌봄 시터게시판 구현 */
+	
+	@Override
+	public List<ComunityVO> sittergetList(Criteria cri) {
+		return comunityMapper.sittergetList(cri);
+	}
+
+	@Override
+	public int sittergetTotalCount(Criteria cri) {
+		 return comunityMapper.sittergetTotalCount(cri);
+	}
+
+	@Override
+	public void sitterupdate(ComunityVO vo) throws Exception {
+		comunityMapper.sitterupdate(vo);
+	}
+
+	@Override
+	public ComunityVO sitterpageview(int post_no) {
+		return comunityMapper.sitterpageview(post_no);
+	}
+
+	@Override
+	public void sitterdelete(int post_no) throws Exception {
+		 comunityMapper.sitterdelete(post_no);
+	}
+
+	@Override
+	public boolean sittercomunityHit(int post_no) throws Exception {
+		return comunityMapper.sittercomunityHit(post_no);
+	}
+
+	@Override
+	public void sitterinsertBoard(ComunityVO comunityvo) {
+		comunityMapper.sitterinsertBoard(comunityvo);
+	}
+
+/* 분양 게시판 구현 */
+	
+	@Override
+	public List<ComunityVO> parcelgetList(Criteria cri) {
+		return comunityMapper.parcelgetList(cri);
+	}
+
+	@Override
+	public int parcelgetTotalCount(Criteria cri) {
+		 return comunityMapper.parcelgetTotalCount(cri);
+	}
+
+	@Override
+	public void parcelupdate(ComunityVO vo) throws Exception {
+		comunityMapper.parcelupdate(vo);
+	}
+
+	@Override
+	public ComunityVO parcelpageview(int post_no) {
+		return comunityMapper.parcelpageview(post_no);
+	}
+
+	@Override
+	public void parceldelete(int post_no) throws Exception {
+		 comunityMapper.parceldelete(post_no);
+	}
+
+	@Override
+	public boolean parcelcomunityHit(int post_no) throws Exception {
+		return comunityMapper.parcelcomunityHit(post_no);
+	}
+
+	@Override
+	public void parcelinsertBoard(ComunityVO comunityvo) {
+		comunityMapper.parcelinsertBoard(comunityvo);
+	}
 
       
 

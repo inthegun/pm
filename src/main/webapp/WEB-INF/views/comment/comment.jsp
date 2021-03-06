@@ -33,7 +33,8 @@
             </div>
         </div>
         <input type="hidden" id="post_no" name="post_no" value="${view.post_no }" />
-        <input type="text" id="user_id" name="user_id" value="${view.user_id }" />        
+        <input type="hidden" id="comunity_id" name="comunity_id" value="${view.comunity_id}"/>
+        <input type="hidden" id="user_id" name="user_id" value="${sessionScope.userId}" />      
     </form>
 </div>
 <div class="container">

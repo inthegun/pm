@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,6 +18,7 @@
 		var re = /^[a-zA-Z0-9]{4,12}$/; // 아이디와 패스워드가 적합한지 검사할 정규식
 		var re2 = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 		// 이메일이 적합한지 검사할 정규식
+		var re3 = /^[0-9]{11}$/; // 휴대폰번호 숫자만입력가능 중간번호 3~4자리에따라 10자~11자
 
 		var id = document.getElementById("user_id");
 		var pw = document.getElementById("user_passwd");
@@ -77,11 +79,16 @@
 		}
 		
 		if (phone.value == "") {  //핸드폰 번호를 기입하지 않은 경우
-			alert("핸드폰 번호를 입력해 주세요");
+			alert("핸드폰 번호를 입력해 주세요 -빼고 번호만입력");
 			phone.focus();
 			phone.value = "";
 			return false;
 		}
+		
+        if (!check(re3, phone, " -빼고 번호만입력해주세요")) {    // 휴대폰번호 형식이 잘못된 경우
+            return false;
+        }
+		
 		if (gender.value == "") {  //성별을 기입하지 않은 경우
 			alert("성별을 선택해 주세요");
 			gender.focus();
@@ -130,6 +137,14 @@ body {
 
 
 <body>
+<c:if test="${sessionScope.userId ne null}">
+    <script type="text/javascript">
+    	alert("잘못된 접근입니다.");
+    	location.href="/"
+    </script>
+</c:if>
+
+<c:if test="${sessionScope.userId eq null}">
 	<div id="register">
 		<h3 class="text-center text-white pt-5">Pick Me Pet Me</h3>
 		<form name="register" role="registerForm"
@@ -183,6 +198,7 @@ body {
 			</div>
 		</form>
 	</div>
+	</c:if>
 </body>
 
 </html>

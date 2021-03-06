@@ -62,8 +62,7 @@
             <label for="exampleFormControlTextarea1">내용</label>
             
             <div class="select_img"><img src="" /></div>
-            <textarea class="form-control" id="post_contact" name="post_contact" rows="10">
-            </textarea>
+            <textarea class="form-control" id="post_contact" name="post_contact" rows="10"></textarea>
             	
           </div>
           

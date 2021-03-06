@@ -16,18 +16,22 @@
          <label>작성자</label> ${view.user_id }
          <br/>
          <label>내용</label> <br/> 
-         ${view.post_contact }
+         <img src="${view.gdsImg }" style="width:50%; hegith:auto;"><br>
+         ${view.post_contact }<br/>
+         <label>책임비</label> <br/>
+         ${view.price }
+         
       
       
       
       <br><br><br>
       <c:if test="${sessionScope.userId eq view.user_id }">
       <input type = "button" value = "수정" class = "btn btn-success" 
-      onclick="location.href='/community/tip_community/update?post_no=${view.post_no}'"/>
+      onclick="location.href='/community/parcel_community/update?post_no=${view.post_no}'"/>
       
 
       <input type="button" value = "삭제" id = "del"class="btn btn-danger" 
-      onclick="location.href='/community/tip_community/delete?post_no=${view.post_no}'"/>
+      onclick="location.href='/community/parcel_community/delete?post_no=${view.post_no}'"/>
       </c:if>
       <script>
       $("#del").click(function(){

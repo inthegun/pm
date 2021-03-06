@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<%@include file="../../includes/header.jsp" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +15,7 @@
 <script
    src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <meta charset="UTF-8">
-
+<%@include file="../../includes/header.jsp" %>
 
 </head>
 

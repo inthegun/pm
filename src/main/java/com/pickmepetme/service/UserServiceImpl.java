@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.pickmepetme.domain.ComunityVO;
+import com.pickmepetme.domain.Criteria;
 import com.pickmepetme.domain.UserVO;
 import com.pickmepetme.mapper.UserMapper;
 
@@ -57,15 +58,27 @@ public class UserServiceImpl implements UserService {
 
 
 	@Override
-	public ArrayList<ComunityVO> mywrite(ComunityVO comunityvo,HttpSession session) {
+	public ArrayList<ComunityVO> mywrite(ComunityVO comunityvo,HttpSession session,Criteria cri) {
 		// TODO Auto-generated method stub
 		logger.info("내가 쓴글 보기 서비스impl");
 		
 		comunityvo.setUser_id((String)session.getAttribute("userId"));
-		
-		return userMapper.mywrite(comunityvo);
+		return userMapper.mywrite(cri);
 		
 	}
+	
+	@Override
+	public void memberUpdate(UserVO vo){
+		userMapper.memberUpdate(vo);		
+	}
+
+	//내가쓴글 총 갯수
+	   @Override
+	   public int mywriteCount(Criteria cri) {
+	      logger.info("UserServiceImpl mywriteCount.........");
+	      return userMapper.mywriteCount(cri);
+	      
+	   }
 	
 	
 	

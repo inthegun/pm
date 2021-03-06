@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class CommentVO {
 	private int comment_no;
+	private String comunity_id;
 	private String user_id;
 	private int post_no;
 	private String comment_contact;
@@ -38,6 +39,12 @@ public class CommentVO {
 	}
 	public void setComment_date(Date comment_date) {
 		this.comment_date = comment_date;
+	}
+	public String getComunity_id() {
+		return comunity_id;
+	}
+	public void setComunity_id(String comunity_id) {
+		this.comunity_id = comunity_id;
 	}
 	
 	

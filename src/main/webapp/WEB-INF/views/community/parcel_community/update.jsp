@@ -36,6 +36,11 @@
   <textarea class="form-control" name="post_contact" rows="5">${view.post_contact }</textarea>
    </div>
 
+
+	 <div class="mb-3">
+  <label for="post_contact" class="form-label">책임비</label>
+  <textarea class="form-control" name="price" rows="5">${view.price }</textarea>
+   </div>
    
    <button type = "submit" id = "ok_Btn" class = "btn btn-success">완료</button>
    <script>

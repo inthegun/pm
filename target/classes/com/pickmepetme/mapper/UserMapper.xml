@@ -33,5 +33,40 @@ values(#{user_id}, #{user_passwd}, #{user_name}, #{user_birth}, #{user_addr}, #{
 	select * from user where user_id=#{user_id}
 </select>
 
+<!-- 내가 쓴글 보기 -->
+<select id="mywrite" resultType="com.pickmepetme.domain.ComunityVO">
+   select * from (
+	select * from comunity c
+	union all 
+	select * from tip_comunity t
+	union all
+	select * from CARE_COMUNITY care
+	union all
+	select * from SITTER_COMUNITY sit
+	union all
+	select post_no,comunity_id,user_id,post_title,post_contact,post_date,gdsThumbImg,gdsImg,hit from PARCEL_COMUNITY par
+) ta where ta.user_id = #{user_id}
+order by post_no desc
+limit #{pageStart},#{amount}
+
+</select>
+
+<!-- 내가 쓴글 총 갯수 -->
+<select id="mywriteCount" resultType="int">
+select count(*) from (
+	select * from comunity c
+	union all 
+	select * from tip_comunity t
+) ta where ta.user_id = #{user_id}
+
+</select>
+
+<!-- 수정 -->
+<update id = "memberUpdate">
+update user set user_passwd = #{user_passwd}, user_addr = #{user_addr}, user_phone = #{user_phone}, user_email = #{user_email} where user_id = #{user_id}
+</update>
+
+
+
 </mapper>
 

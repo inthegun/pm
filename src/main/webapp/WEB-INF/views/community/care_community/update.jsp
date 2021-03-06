@@ -31,7 +31,7 @@
   <input type="text" class="form-control" name="post_title" value = "${view.post_title }" placeholder="${view.post_title }">
    </div>
 
-   <div class="mb-3">
+    <div class="mb-3">
   <label for="post_contact" class="form-label">내용</label>
   <textarea class="form-control" name="post_contact" rows="5">${view.post_contact }</textarea>
    </div>

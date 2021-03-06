@@ -64,8 +64,8 @@
                 <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">돌봄</h6>
-                        <a class="collapse-item" href="../pet_help/list">펫헬퍼</a>
-                        <a class="collapse-item" href="../pet_sit/list.jsp">펫시터</a>
+                        <a class="collapse-item" href="../../community/care_community/list">펫헬퍼</a>
+                        <a class="collapse-item" href="../../community/sitter_community/list">펫시터</a>
                     </div>
                 </div>
             </li>
@@ -74,20 +74,12 @@
             
             <!-- 사이드바 분양 카테고리 // jsp 만들면 링크 고치기 !-->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
+                <a class="nav-link collapsed" href="../../community/parcel_community/list">
                     <i class="fas fa-fw fa-cat"></i>
                     <span>분양</span>
                 </a>
                 
-                <!-- 링크 고쳐야 함 -->
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">분양</h6>
-                        <a class="collapse-item" href="../parcel_free/free_community/list">무료분양</a>
-                        <a class="collapse-item" href="../parcel_charge/list">유료분양</a>
-                    </div>
-                </div>
+               
             </li>
             
             <!-- 분양끝 -->
@@ -133,9 +125,9 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">MyPage:</h6>
                         <a class="collapse-item" href="/member/mywrite">내가 쓴 글</a>
-                        <a class="collapse-item" href="/member/">반려동물 정보</a>
+                        
                         <a class="collapse-item" href="/member/info">회원 정보</a>
-                        <a class="collapse-item" href="/member/">최근 거래 내역</a>
+                        
                     </div>
                 </div>
             </li>
@@ -257,6 +249,8 @@
                                 <input type="text" name="user_id" id="user_id" placeholder="아이디 입력" >      
                                 <input type="password" name="user_passwd" id="user_passwd" placeholder="비밀번호 입력" style="margin-left:5px">
                                 <input type="submit" name="submit" class="btn btn-info btn-md" value="submit" style="margin-left:10px">
+                                <input type="button" name="register" class="btn btn-info btn-md" value="회원가입" style="margin-left:10px" 
+                                 onclick="location.href='/member/register'"/>
                         </form>
                         </span>
                         </c:if> <%-- 로그인 안되어있을때 조건 종료  --%>
