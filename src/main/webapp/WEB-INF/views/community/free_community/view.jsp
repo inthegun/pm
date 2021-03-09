@@ -11,12 +11,25 @@
 <title>Insert title here</title>
 </head>
 <body>
-         <label>제목</label> ${view.post_title }
-         <br/>
-         <label>작성자</label> ${view.user_id }
-         <br/>
-         <label>내용</label> <br/> 
-         ${view.post_contact }
+          
+   <div class="mb-3">
+    <label for="staticEmail" class="col-sm-2 col-form-label">작성자</label>
+    <div class="col-sm-10">
+      <input type="text" readonly class="form-control-plaintext" name="user_id" value="${view.user_id }">
+    </div>
+  </div>
+  <div class="mb-3">
+  <label for="post_title" class="form-label">제목</label>
+  <input type="text" class="form-control" name="post_title" value = "${view.post_title }" placeholder="${view.post_title }" readonly="readonly">
+   </div>
+   
+    <div class="mb-3">
+    
+    <img src="${view.gdsImg }" style="width:30%; hegith:auto;"><br>
+    
+  <label for="post_contact" class="form-label">내용</label>
+  <textarea class="form-control" readonly="readonly" name="post_contact" rows="5">${view.post_contact }</textarea>
+   </div>
       
       
       
